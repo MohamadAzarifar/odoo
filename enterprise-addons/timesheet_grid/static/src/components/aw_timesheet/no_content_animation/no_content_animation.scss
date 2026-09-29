@@ -1,0 +1,224 @@
+
+.aw_timesheet_no_content_container {
+    // Configuration
+    $aw-nca-timeline-steps: 5;
+    $aw-nca-display-types: (block, flex, inline-flex);
+
+    // Generate utility classes for each display type
+    @each $display in $aw-nca-display-types {
+        // FROM utilities: show from step X onwards
+        @for $step from 1 through $aw-nca-timeline-steps {
+            .aw_nca_d-#{$display}_from_step_#{$step} {
+                display: none;
+            }
+
+            @for $current-step from $step through $aw-nca-timeline-steps {
+                &.aw_nca_step_#{$current-step} .aw_nca_d-#{$display}_from_step_#{$step} {
+                    display: $display;
+                }
+            }
+        }
+
+        // FROM utilities: show from step X onwards
+        @for $step from 1 through $aw-nca-timeline-steps {
+            @for $current-step from $step through $aw-nca-timeline-steps {
+                &.aw_nca_step_#{$current-step} .aw_nca_d-none_from_step_#{$step} {
+                    display: none;
+                }
+            }
+        }
+
+        // ONLY utilities: show only in step X
+        @for $step from 1 through $aw-nca-timeline-steps {
+            .aw_nca_d-#{$display}_only_step_#{$step} {
+                display: none;
+            }
+
+            &.aw_nca_step_#{$step} .aw_nca_d-#{$display}_only_step_#{$step} {
+                display: $display;
+            }
+        }
+    }
+
+
+    @for $step from 1 through $aw-nca-timeline-steps {
+        .aw_nca_opacity-1_from_step_#{$step} {
+            opacity: 0;
+        }
+
+        @for $current-step from $step through $aw-nca-timeline-steps {
+            &.aw_nca_step_#{$current-step} .aw_nca_opacity-1_from_step_#{$step} {
+                opacity: 1;
+            }
+        }
+    }
+
+    .aw_nc_animation, .aw_nc_final_message  {
+        transition: opacity 150ms ease-in-out;
+    }
+    .aw_nc_final_message {
+        opacity: 0;
+    }
+
+    $activity_box_width: 16rem;
+
+    // Left
+    .aw_nc_activities_card {
+        .aw_nc_activities_scroller {
+            height: 12rem;
+            width: $activity_box_width * 4;
+        }
+        .aw_nc_activities_entry {
+            height: 12rem;
+            width: $activity_box_width;
+        }
+    }
+
+    .aw_nc_activities_card, .o_aw_nc_card {
+        flex: 0 0 $activity_box_width;
+    }
+
+    .aw_nc_activities_scroller {
+        transition: transform .3s ease-out;
+    }
+
+    // Scollable Activities
+    @keyframes activity_scroller_animation {
+        to { transform: translateY(-25%); }
+    }
+    .aw_nc_activities_entry_mail_scroller, .aw_nc_activities_entry_write_scroller,
+    .aw_nc_activities_entry_code_scroller {
+        height: 150%;
+    }
+
+    &.aw_nca_step_changed .o_aw_nc_card {
+        border-color: #0a8f88;
+        transition: border-color 0.2s ease-out, transform 0.1s ease-out;
+    }
+
+    .o_aw_nc_card {
+        transition: all 0.6s ease-in;
+    }
+
+
+    $_ts_number: 4;
+    $_ts_height: (50%/$_ts_number);
+
+    .o_aw_nc_line {
+        height: 10rem;
+        width: 100px;
+    }
+
+    .o_aw_nc_card_wrapper {
+        height: 10rem;
+    }
+    .o_aw_nc_card_entries {
+        height: 20rem;
+        transform: translateY(-100%);
+        transition: transform 0.2s ease-in-out;
+    }
+    .o_aw_nc_card_message {
+        height: 50%;
+        transition: opacity .3s ease-in-out;
+    }
+
+    &.aw_nca_step_1 {
+        // Activities
+        .aw_nc_activities_entry_mail_scroller {
+            animation: activity_scroller_animation 6s infinite ease-in-out alternate;
+        }
+        // Timesheets
+        .o_aw_nc_card_entries {
+            transform: translateY((50% - $_ts_height) * -1);
+        }
+    }
+    &.aw_nca_step_2 {
+        // Activities
+        .aw_nc_activities_scroller {
+            transform: translateX(-$activity_box_width);
+        }
+        .aw_nc_activities_entry_mail_scroller, .aw_nc_activities_entry_write_scroller {
+            animation: activity_scroller_animation 6s infinite ease-in-out alternate;
+        }
+        // Timesheets
+        .o_aw_nc_card_entries {
+            transform: translateY((50% - $_ts_height * 2) * -1);
+        }
+    }
+    &.aw_nca_step_3 {
+        // Activities
+        .aw_nc_activities_scroller {
+            transform: translateX(-$activity_box_width * 2);
+        }
+        .aw_nc_activities_entry_write_scroller, .aw_nc_activities_entry_code_scroller {
+            animation: activity_scroller_animation 6s infinite ease-in-out alternate;
+        }
+        // Timesheets
+        .o_aw_nc_card_entries {
+            transform: translateY((50% - $_ts_height * 3) * -1);
+        }
+    }
+    &.aw_nca_step_4 {
+        // Activities
+        .aw_nc_activities_scroller {
+            transform: translateX(-$activity_box_width * 3);
+        }
+        .aw_nc_activities_entry_code_scroller {
+            animation: activity_scroller_animation 6s infinite ease-in-out alternate;
+        }
+        // Timesheets
+        .o_aw_nc_card_entries {
+            transform: translateY((50% - $_ts_height * 4) * -1);
+        }
+    }
+    &.aw_nca_step_5 {
+        .aw_nc_activities_scroller {
+            transform: translateX(-$activity_box_width * 4);
+        }
+        .o_aw_nc_card_entries {
+            transition: none;
+            transform: translateY(-50%);
+        }
+        .o_aw_nc_line {
+            opacity: 0;
+        }
+        .aw_nc_animation {
+            opacity: 0;
+        }
+        .aw_nc_final_message {
+            opacity: 1;
+        }
+    }
+
+    .o_aw_nc_card_entry {
+        height: $_ts_height;
+        padding: 0.25% 0;
+    }
+
+    /* Flow Line (Center) */
+    .o_aw_nc_line_flow {
+        height: 2px;
+        background: #e5e5e5;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #4A90E2, transparent);
+            animation: flowPulse 1s ease-in-out infinite;
+        }
+    }
+
+    @keyframes flowPulse {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+
+}

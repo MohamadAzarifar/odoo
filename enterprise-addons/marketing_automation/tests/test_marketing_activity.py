@@ -1,0 +1,314 @@
+from dateutil.relativedelta import relativedelta
+
+from odoo.fields import Datetime
+from odoo.addons.marketing_automation.tests.common import MarketingAutomationCommon
+from odoo.exceptions import ValidationError
+from odoo.tests import tagged, users
+
+
+class MarketingActivityCommon(MarketingAutomationCommon):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.date_reference = Datetime.from_string('2026-03-04 02:00:00')
+        cls.activity = cls._create_activity_mail(
+            cls.campaign,
+            user=cls.user_marketing_automation,
+            act_values={
+                'interval_number': 0,
+                'interval_type': 'hours',
+                'trigger_type': 'begin',
+            },
+        )
+
+
+@tagged('ma_activity', 'ma_activity_type')
+class TestMarketingActivity(MarketingActivityCommon):
+
+    @users('user_marketing_automation')
+    def test_activity_type_split(self):
+        """ Test split activities. Two kind: either based on interaction (e.g.
+        split based on mail_open), either based on a domain. """
+        test_records = self.test_contacts
+        campaign = self.campaign.with_env(self.env)
+        begin_activity = self.activity.with_env(self.env)
+        campaign.write({
+            'state': 'running',
+        })
+
+        with self.mock_datetime_and_now(self.date_reference):
+            act_split_domain = self._create_activity_split(
+                campaign, [('id', 'in', test_records[:3].ids)],
+                act_values={
+                    'interval_number': 4,
+                    'interval_type': 'hours',
+                    'parent_id': begin_activity.id,
+                    'trigger_type': 'activity',
+                }
+            )
+            act_split_domain_yes = self._create_activity_mail(
+                campaign,
+                act_values={
+                    'interval_number': 1,
+                    'interval_type': 'days',
+                    'parent_id': act_split_domain.id,
+                    'trigger_type': 'activity',
+                },
+            )
+            act_split_domain_no = self._create_activity_mail(
+                campaign,
+                act_values={
+                    'interval_number': 2,
+                    'interval_type': 'days',
+                    'is_split_no': True,
+                    'parent_id': act_split_domain.id,
+                    'trigger_type': 'activity',
+                },
+            )
+            act_split_interaction = self._create_activity_split(
+                campaign, [('id', 'in', test_records[:3].ids)],
+                act_values={
+                    'interval_number': 4,
+                    'interval_type': 'hours',
+                    'parent_id': begin_activity.id,
+                    'trigger_type': 'mail_open',
+                }
+            )
+            act_split_interaction_yes = self._create_activity_mail(
+                campaign,
+                act_values={
+                    'interval_number': 1,
+                    'interval_type': 'days',
+                    'parent_id': act_split_interaction.id,
+                    'trigger_type': 'activity',
+                },
+            )
+            act_split_interaction_no = self._create_activity_mail(
+                campaign,
+                act_values={
+                    'interval_number': 2,
+                    'interval_type': 'days',
+                    'is_split_no': True,
+                    'parent_id': act_split_interaction.id,
+                    'trigger_type': 'activity',
+                },
+            )
+
+        # synchronize participants, launch begin activities
+        with self.mock_datetime_and_now(self.date_reference), self.registry_test_mode():
+            self.cron_ma_sync_participants.method_direct_trigger()
+        with self.mock_datetime_and_now(self.date_reference), self.registry_test_mode():
+            self.cron_ma_execute_activities.method_direct_trigger()
+        # --> result: interactions are planned (not their children)
+        self.assertMarketAutoTraces([{
+            'fields_values': {
+                'schedule_date': self.date_reference + relativedelta(hours=4),  # interval of activity
+            },
+            'records': test_records,
+            'status': 'scheduled',
+        }], act_split_domain)
+        self.assertMarketAutoTraces([{
+            'fields_values': {
+                'schedule_date': self.date_reference + relativedelta(hours=4),  # interval of activity
+            },
+            'records': test_records,
+            'status': 'scheduled',
+        }], act_split_interaction)
+        self.assertActivityWoTrace(act_split_domain_yes + act_split_domain_no + act_split_interaction_yes + act_split_interaction_no)
+
+        # perform split (automatic, split is done during '_generate_children_traces')
+        with self.mock_datetime_and_now(self.date_reference + relativedelta(hours=5)), self.registry_test_mode():
+            self.cron_ma_execute_activities.method_direct_trigger()
+        self.assertMarketAutoTraces([{
+            'records': test_records,
+            'status': 'processed',
+        }], act_split_domain)
+        self.assertMarketAutoTraces([{
+            'records': test_records[:3],
+            'status': 'scheduled',
+        }], act_split_domain_yes)
+        self.assertMarketAutoTraces([{
+            'records': test_records[3:],
+            'status': 'scheduled',
+        }], act_split_domain_no)
+
+    @users('user_marketing_automation')
+    def test_activity_type_split_interaction(self):
+        test_records = self.test_contacts[:2]
+        campaign = self.campaign.with_env(self.env)
+        campaign.write({'enroll_domain': [('id', 'in', test_records.ids)]})
+        with self.mock_datetime_and_now(self.date_reference):
+            useless_activity = self._create_activity(campaign, trigger_type='activity', activity_type='mail', parent_id=self.activity.id)
+            new_activity_split = self._create_activity(
+                campaign, activity_type='split',
+                parent_id=useless_activity.id,
+                triggering_activity_id=self.activity.id, trigger_type="mail_open")
+
+            new_activity_yes = self._create_activity(campaign, trigger_type="activity", parent_id=new_activity_split.id, activity_type='mail')
+
+            new_activity_no = self._create_activity(campaign, trigger_type="activity", parent_id=new_activity_split.id, is_split_no=True, activity_type='mail')
+            self._launch_campaign(campaign)
+            campaign.action_synchronize_traces()
+
+        # Send the mailing
+        campaign.action_execute_activities()
+
+        with self.mock_datetime_and_now(self.date_reference), self.mock_mail_gateway():
+            self.gateway_mail_trace_open(self.activity.mass_mailing_id, test_records[0])
+
+        # Skip the useless activity
+        campaign.action_execute_activities()
+
+        self.assertMarketAutoTraces([{
+            "records": test_records,
+            "status": "scheduled",
+            "fields_values": {
+                "schedule_date": self.date_reference
+            }
+        }], new_activity_split)
+
+        campaign.action_execute_activities()
+        self.assertMarketAutoTraces([{
+            "records": test_records,
+            "status": "processed",
+        }], new_activity_split)
+
+        self.assertMarketAutoTraces([{
+            "records": test_records[0],
+            "status": "scheduled"
+        }], new_activity_yes)
+        self.assertMarketAutoTraces([{
+            "records": test_records[1],
+            "status": "scheduled"
+        }], new_activity_no)
+
+    @users('user_marketing_automation')
+    def test_activity_trigger(self):
+        test_records = self.test_contacts[:2]
+        campaign = self.campaign.with_env(self.env)
+        campaign.write({'enroll_domain': [('id', 'in', test_records.ids)]})
+
+        with self.mock_datetime_and_now(self.date_reference):
+            new_activity_wait_domain = self._create_activity(campaign, activity_type='structure', trigger_type='wait_value', wait_value_domain=[('email', 'ilike', '%contact.20%')], parent_id=self.activity.id)
+            new_activity_interaction_click = self._create_activity(campaign, activity_type='structure', trigger_type='mail_click', parent_id=self.activity.id)
+            new_activity_interaction_open = self._create_activity(campaign, activity_type='structure', trigger_type="mail_open", parent_id=new_activity_interaction_click.id, triggering_activity_id=self.activity.id)
+
+            self._launch_campaign(campaign)
+            with self.mock_mail_gateway(), self.mock_datetime_and_now(self.date_reference):
+                campaign.action_execute_activities()
+
+            # need to wait for a value => scheduled
+            self.assertMarketAutoTraces([{
+                "records": test_records,
+                "status": "scheduled",
+                "fields_values": {
+                    "schedule_date": self.date_reference
+                }
+            }], new_activity_wait_domain)
+
+            # wait for a processed event => scheduled when event is indeed processed
+            self.assertMarketAutoTraces([{
+                "records": test_records,
+                "status": "scheduled",
+                "fields_values": {
+                    "schedule_date": False
+                }
+            }], new_activity_interaction_click)
+
+        test_records[0].write({"email": "ma.test.contact.20@example.com"})
+        with self.mock_datetime_and_now(self.date_reference + relativedelta(days=1)):
+            # retry the postponed traces by simulating the CRON call
+            campaign.action_execute_activities()
+            self.gateway_mail_trace_click_simple(self.activity.mass_mailing_id, test_records[0])
+        # test_records[0] should be processed now that it has changed to comply with the wait_value_domain
+        self.assertMarketAutoTraces([{
+            "records": test_records[0],
+            "status": "processed",
+        }, {
+            "records": test_records[1],
+            "status": "waiting",  # Still waiting
+        }], new_activity_wait_domain)
+
+        # test_records[0] should be processed as the mail was clicked
+        self.assertMarketAutoTraces([{
+            "records": test_records[0],
+            "status": "processed",
+        }, {
+            "records": test_records[1],
+            "status": "scheduled"
+        }], new_activity_interaction_click)
+
+        self.assertMarketAutoTraces([{
+            "records": test_records[0],
+            "status": "scheduled",
+        }], new_activity_interaction_open)
+
+        campaign.action_execute_activities()
+        self.assertMarketAutoTraces([{
+            "records": test_records[0],
+            "status": "processed",
+        }], new_activity_interaction_open)
+
+
+@tagged('ma_activity')
+class TestMarketingActivityBuilder(MarketingActivityCommon):
+
+    @users("user_marketing_automation")
+    def test_activity_deletion(self):
+        root_activity = self.activity.with_env(self.env)
+        activity_to_delete = self._create_activity_mail(
+            self.campaign.with_env(self.env), self.env.user,
+            act_values={
+                "interval_number": 4,
+                "parent_id": root_activity.id,
+                "trigger_type": "activity",
+            },
+        )
+        activities, grand_children_activities = self.env['marketing.activity'], self.env['marketing.activity']
+        for i in range(3):
+            activities |= self._create_activity_mail(
+                self.campaign.with_env(self.env), self.env.user,
+                act_values={
+                    "parent_id": root_activity.id,
+                    "trigger_type": "activity",
+                },
+            )
+            grand_children_activities |= self._create_activity_mail(
+                self.campaign.with_env(self.env), self.env.user,
+                act_values={
+                    "parent_id": activities[i].id,
+                    "trigger_type": "activity",
+                },
+            )
+            grand_children_activities |= self._create_activity_mail(
+                self.campaign.with_env(self.env), self.env.user,
+                act_values={
+                    "parent_id": activities[i].id,
+                    "trigger_type": "activity",
+                },
+            )
+        activity_to_delete.action_delete_step('activity')
+        self.assertTrue(activity_to_delete.exists())
+        activity_to_delete.action_delete_step('delay')
+        self.assertFalse(activity_to_delete.exists())
+
+        root_activity.action_delete_step('activity', True)
+        self.assertFalse(grand_children_activities.exists())
+
+
+@tagged('ma_activity')
+class TestMarketingActivityIntegrity(MarketingActivityCommon):
+
+    @users('user_marketing_automation')
+    def test_integrity_view_coordinates(self):
+        campaign = self.campaign.with_env(self.env)
+        activity = self.activity.with_env(self.env)
+        campaign.action_sort_steps()
+        # surface incorrect key
+        with self.assertRaises(ValidationError):
+            activity.write({'view_coordinates': {'bad_key': 'I am the bad guy'}})
+        # deep incorrect key
+        with self.assertRaises(ValidationError):
+            activity.write({'view_coordinates': {'trigger': {'x': {'duh': 'the bad guy'}, 'y': 0}}})
+        activity.write({'view_coordinates': {'trigger': {'x': 1, 'y': 2}}})

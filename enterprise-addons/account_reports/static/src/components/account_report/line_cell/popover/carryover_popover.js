@@ -1,0 +1,38 @@
+import { useService } from "@web/core/utils/hooks";
+import { ORM } from "@web/core/orm_plugin";
+
+import { Component, t, usePlugin, useProps } from "@odoo/owl";
+
+export class AccountReportCarryoverPopover extends Component {
+    static template = "account_reports.AccountReportCarryoverPopover";
+
+    props = useProps({
+        close: t.function(),
+        carryoverData: t.object(),
+        options: t.object(),
+        context: t.object(),
+    });
+
+    actionService = useService("action");
+    orm = usePlugin(ORM);
+
+    //------------------------------------------------------------------------------------------------------------------
+    //
+    //------------------------------------------------------------------------------------------------------------------
+    async viewCarryoverLinesAction(expressionId, columnGroupKey) {
+        const viewCarryoverLinesAction = await this.orm.call(
+            "account.report.expression",
+            "action_view_carryover_lines",
+            [
+                expressionId,
+                this.props.options,
+                columnGroupKey,
+            ],
+            {
+                context: this.props.context,
+            }
+        );
+        this.props.close();
+        return this.actionService.doAction(viewCarryoverLinesAction);
+    }
+}

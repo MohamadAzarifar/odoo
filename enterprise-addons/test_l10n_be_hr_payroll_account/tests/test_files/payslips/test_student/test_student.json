@@ -1,0 +1,33 @@
+{
+    "payslip_1": {
+        "BASIC": 586.98,
+        "BONUS_PP": 0.0,
+        "BONUS_SALARY": 0.0,
+        "CAR.PRIV": 13.45,
+        "DH_BASIC": 0.0,
+        "DH_GROSS": 0.0,
+        "DH_PP": 0.0,
+        "DH_SALARY": 0.0,
+        "EMP_BONUS_SALARY": 586.98,
+        "EmpBonus.1.FALLBACK": 0.0,
+        "EmpBonus.1.STD": 0.0,
+        "GROSS": 584.52,
+        "HOLIDAY_TAX_PROV": 106.83,
+        "HOLIDAY_TAX_PROV_BASE": 586.98,
+        "MEAL_VOUCHER_EMPLOYER": 38.16,
+        "MEAL_V_EMP": -6.54,
+        "NET": 577.98,
+        "NET_TO_RECOVER": 0.0,
+        "ONSS": -15.91,
+        "ONSSEMPLOYER": -114.88,
+        "ONSSEMPLOYERBASIC": 31.87,
+        "ONSSTOTAL": 15.91,
+        "ONSS_BASE_TOTAL": 586.98,
+        "ONSS_DOUBLE_HOLIDAY": 0.0,
+        "ONSS_STRUCTURAL": -146.75,
+        "REMUNERATION": 586.98,
+        "REP.FEES": 0.0,
+        "REP.FEES.VOLATILE": 0.0,
+        "SALARY": 586.98
+    }
+}
