@@ -1,0 +1,12 @@
+[Unit]
+Description=Apply Odoo outbound address allowlist
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/odoo-egress.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

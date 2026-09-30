@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="timesheet_grid.aw_timesheet_no_content_animation">
+    <section class="aw_timesheet_no_content_container" t-ref="this.containerRef">
+        <div class="h2 mb-4">
+            Automatic timesheets, zero effort.
+        </div>
+
+        <div class="position-relative">
+            <div class="aw_nc_animation d-flex align-items-center justify-content-center gap-1 gap-xxl-3 pe-none">
+                <!-- Activities (Left) -->
+                <div class="aw_nc_activities_card card rounded-3 bg-view shadow-sm overflow-hidden">
+                    <div class="aw_nc_activities_scroller d-flex text-start bg-view z-1 position-relative">
+                        <!-- Mail-->
+                        <div id="aw_nc_activities_entry_mail" class="aw_nc_activities_entry d-flex flex-column">
+                            <div class="border-bottom py-1 px-2 d-flex gap-1 flex-grow-0 flex-shrink-0 z-1 bg-view">
+                                <span class="p-1 rounded-circle bg-danger" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-warning" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-success" style="height: 0.5em; width:0.5em"/>
+                            </div>
+                            <div class="d-flex flex-grow-1">
+                                <aside class="border-end col-3 p-1 h-100">
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-8" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-6" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-7" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-8" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-4" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-6" style="min-height: 6px"/>
+                                    </div>
+                                </aside>
+                                <div class="aw_nc_activities_entry_mail_scroller smaller py-1 px-2 flex-grow-1">
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-6" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-3" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-5" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-6" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-4" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-7" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-6" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2 opacity-25" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5 opacity-25" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded col-5" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="placeholder d-block rounded col-4 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-7 mb-2" style="min-height: 3px"/>
+                                    <div class="placeholder d-block rounded col-5" style="min-height: 3px"/>
+                                    <hr class="my-2"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Write Report-->
+                        <div id="aw_nc_activities_entry_write" class="aw_nc_activities_entry d-flex flex-column">
+                            <div class="border-bottom py-1 px-2 d-flex gap-1 flex-grow-0 flex-shrink-0 z-1 bg-view">
+                                <span class="p-1 rounded-circle bg-danger" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-warning" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-success" style="height: 0.5em; width:0.5em"/>
+                            </div>
+                            <div class="d-flex flex-grow-1 pt-3">
+                                <div class="aw_nc_activities_entry_write_scroller d-block col-8 mx-auto">
+                                    <div class="placeholder d-block col-10 mb-1" style="min-height: 8px"/>
+                                    <div class="placeholder d-block col-12 mb-3" style="min-height: 5px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-9 mb-1" style="min-height: 3px"/>
+                                    <div class="d-flex pt-2">
+                                        <div class="col-6">
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-7 mb-2" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-7 mb-2" style="min-height: 3px"/>
+                                        </div>
+                                        <div class="col-6 d-flex align-items-end justify-content-between pb-2 border-bottom">
+                                            <div class="bg-success h-100 px-1"/>
+                                            <div class="bg-warning h-75 px-1"/>
+                                            <div class="bg-danger h-50 px-1"/>
+                                            <div class="bg-warning h-75 px-1"/>
+                                            <div class="bg-success h-100 px-1"/>
+                                            <div class="bg-danger h-25 px-1"/>
+                                            <div class="bg-warning h-75 px-1"/>
+                                        </div>
+                                    </div>
+                                    <hr class="my-2"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-9 mb-1" style="min-height: 3px"/>
+                                    <div class="d-flex flex-row-reverse pt-2">
+                                        <div class="col-7">
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-7 mb-2" style="min-height: 3px"/>
+                                            <div class="placeholder d-block rounded col-7 mb-2" style="min-height: 3px"/>
+                                        </div>
+                                        <div class="col-5 d-flex flex-column align-items-end justify-content-between pe-2 border-end">
+                                            <div class="bg-success w-100 py-1"/>
+                                            <div class="bg-warning w-75 py-1"/>
+                                            <div class="bg-danger w-50 py-1"/>
+                                            <div class="bg-warning w-75 py-1"/>
+                                            <div class="bg-success w-100 py-1"/>
+                                            <div class="bg-danger w-25 py-1"/>
+                                            <div class="bg-warning w-75 py-1"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Coding-->
+                        <div id="aw_nc_activities_entry_code" class="aw_nc_activities_entry d-flex flex-column">
+                            <div class="border-bottom border-dark py-1 px-2 d-flex gap-1 flex-grow-0 flex-shrink-0 z-1 bg-dark">
+                                <span class="p-1 rounded-circle bg-danger" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-warning" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-success" style="height: 0.5em; width:0.5em"/>
+                            </div>
+                            <div class="d-flex flex-grow-1 bg-black pt-1">
+                                <div class="aw_nc_activities_entry_code_scroller d-block col-10 mx-auto font-monospace">
+    <pre class="border-0 p-0 bg-transparent" style="color: rgb(83, 255, 47); font-size: 4px; white-space: pre-wrap;">
+    <div id="aw_nc_activities_entry_write">
+        <div class="border-bottom py">
+            <span class="p-1 bg-danger"/>
+            <span class="p-1 bg-warning"/>
+            <span class="p-1 bg-success"/>
+        </div>
+        <div class="d-flex flex-grow-1 pt-3">
+            <div class="write_scroller d-block col-8 mx-auto">
+                <div class="d-flex pt-2">
+                    <div class="col-6">
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                        <div class="placeholder"/>
+                    </div>
+                    <div class="col-6 d-flex align-items-end justify-content-between pb-2 border-bottom">
+                        <div class="bg-success h-100 px-1"/>
+                        <div class="bg-warning h-75 px-1"/>
+                        <div class="bg-danger h-50 px-1"/>
+                        <div class="bg-warning h-75 px-1"/>
+                        <div class="bg-success h-100 px-1"/>
+                        <div class="bg-danger h-25 px-1"/>
+                        <div class="bg-warning h-75 px-1"/>
+                    </div>
+                </div>
+                <hr class="my-2"/>
+                <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                <div class="placeholder d-block col-9 mb-1" style="min-height: 3px"/>
+                <div class="d-flex flex-row-reverse pt-2">
+                    <div class="col-7">
+                        <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                        <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                        <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                        <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                        <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                        <div class="placeholder d-block rounded col-10 mb-1" style="min-height: 3px"/>
+                        <div class="placeholder" style="min-height: 3px"/>
+                        <div class="placeholder d-block rounded col-7 mb-2" style="min-height: 3px"/>
+                    </div>
+                    <div class="col-5 d-flex flex-column align-items-end justify-content-between pe-2 border-end">
+                        <div class="bg-success w-100 py-1"/>
+                        <div class="bg-warning w-75 py-1"/>
+                        <div class="bg-danger w-50 py-1"/>
+                        <div class="bg-warning w-75 py-1"/>
+                        <div class="bg-success w-100 py-1"/>
+                        <div class="bg-danger w-25 py-1"/>
+                        <div class="bg-warning w-75 py-1"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Call-->
+                        <div id="aw_nc_activities_entry_call" class="aw_nc_activities_entry d-flex flex-column">
+                            <div class="border-bottom py-1 px-2 d-flex gap-1 flex-grow-0 flex-shrink-0 z-1 bg-view">
+                                <span class="p-1 rounded-circle bg-danger" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-warning" style="height: 0.5em; width:0.5em"/>
+                                <span class="p-1 rounded-circle bg-success" style="height: 0.5em; width:0.5em"/>
+                            </div>
+                            <div class="d-flex flex-grow-1">
+                                <div class="px-2 py-2 flex-grow-1">
+                                    <div class="bg-black h-50 overflow-hidden pt-1 mb-3 rounded-3 border text-center">
+                                        <i class="oi oi-filled oi-7x text-white" data-icon="person" aria-hidden="true"/>
+                                    </div>
+                                    <div class="placeholder d-block col-10 mb-1" style="min-height: 8px"/>
+                                    <div class="placeholder d-block col-12 mb-3" style="min-height: 5px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-12 mb-1" style="min-height: 3px"/>
+                                    <div class="placeholder d-block col-9 mb-1" style="min-height: 3px"/>
+
+                                </div>
+                                <aside class="border-start col-3 p-1 h-100">
+                                    <div class="d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-8" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-6" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-7" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-8" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-4" style="min-height: 6px"/>
+                                    </div>
+                                    <div class="opacity-50 d-flex align-items-center smaller gap-1 mb-2">
+                                        <i class="oi oi-filled" data-icon="account_circle" aria-hidden="true"/>
+                                        <div class="placeholder rounded-2 col-6" style="min-height: 6px"/>
+                                    </div>
+                                </aside>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flow Line (Center) -->
+                <div class="o_aw_nc_line flex-grow-0 flex-shink-1 d-flex align-items-center">
+                    <div class="o_aw_nc_line_flow position-relative overflow-hidden w-100"/>
+                </div>
+
+                <!-- Timesheet (Right) -->
+                <div class="o_aw_nc_card card rounded-3 shadow-lg">
+                    <div class="card-body">
+                        <div class="pb-3 d-flex gap-1 align-items-center ">
+                            <img style="width: 1em; height: 1em" class="d-inline-block"
+                                 src="/timesheet_grid/static/description/icon.svg"/>
+                            <div class="smaller fw-medium lh-1">Timesheets</div>
+                        </div>
+                        <div class="o_aw_nc_card_wrapper overflow-hidden">
+                            <div class="o_aw_nc_card_entries d-flex flex-column">
+                                <t t-set="description">
+                                    <i class="oi oi-fw oi-filled" data-icon="phone" aria-hidden="true"/>
+                                    Call Marc
+                                </t>
+                                <t t-call="timesheet_grid.aw_timesheet_no_content_timesheet"
+                                    entry_id.translate="o_aw_nc_card_entry_4"
+                                    description="description"
+                                    duration.translate="13m"
+                                    isCompleteAtStep="5"/>
+
+                                <t t-set="description">
+                                    <i class="oi oi-fw me-1" data-icon="code" aria-hidden="true"/>
+                                    Coding PR#23
+                                </t>
+                                <t t-call="timesheet_grid.aw_timesheet_no_content_timesheet"
+                                    entry_id.translate="o_aw_nc_card_entry_3"
+                                    description="description"
+                                    duration.translate="43m"
+                                    isCompleteAtStep="4"/>
+
+                                <t t-set="description">
+                                    <i class="oi oi-fw me-1" data-icon="description" aria-hidden="true"/>
+                                    Write Report
+                                </t>
+                                <t t-call="timesheet_grid.aw_timesheet_no_content_timesheet"
+                                    entry_id.translate="o_aw_nc_card_entry_2"
+                                    description="description"
+                                    duration.translate="38m"
+                                    isCompleteAtStep="3"/>
+
+                                <t t-set="description">
+                                    <i class="oi oi-fw me-1" data-icon="mail" aria-hidden="true"/>
+                                    Read emails
+                                </t>
+                                <t t-call="timesheet_grid.aw_timesheet_no_content_timesheet"
+                                    entry_id.translate="o_aw_nc_card_entry_1"
+                                    description="description"
+                                    duration.translate="8m"
+                                    isCompleteAtStep="2"/>
+
+                                <div
+                                    class="o_aw_nc_card_message aw_nca_opacity-1_from_step_5 d-flex justify-content-center align-items-center"
+                                >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Final Message-->
+            <div class="aw_nc_final_message position-absolute top-0 start-0 end-0 bottom-0 d-flex align-items-center justify-content-center">
+                <span class="h2 text-center">
+                    Never lose track<br/>of your time again.<br/><br/>
+                    <span class="display-3-fs mt-2">🙂</span>
+                </span>
+            </div>
+        </div>
+    </section>
+</t>
+<t t-name="timesheet_grid.aw_timesheet_no_content_timesheet">
+    <div class="o_aw_nc_card_entry" t-att-id="entry_id">
+        <div class="align-items-center h-100 text-bg-200 rounded-2 d-flex justify-content-between px-2">
+            <div class="text-start">
+                <small t-out="description"/>
+                <span t-attf-class="aw_nca_d-none_from_step_{{isCompleteAtStep}}">...</span>
+            </div>
+            <div class="entry-time position-relative">
+                <i
+                    t-attf-class="aw_nca_d-none_from_step_{{isCompleteAtStep}}"
+                    class="oi text-action oi-spin position-absolute end-0 lh-base"
+                    data-icon="autorenew"
+                />
+                <span t-attf-class="aw_nca_opacity-1_from_step_{{isCompleteAtStep}} text-success o_tabular_nums">
+                    <b t-out="duration"/>
+                </span>
+            </div>
+        </div>
+    </div>
+</t>
+</templates>

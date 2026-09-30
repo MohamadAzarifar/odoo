@@ -1,0 +1,17 @@
+{
+    "payslip_1": {
+        "DH_BASIC": 166.95,
+        "DH_GROSS": 146.79,
+        "DH_PP": -62.22,
+        "DH_SALARY": 154.24,
+        "DOUBLE": 151.38,
+        "DOUBLE_COMPLEMENTARY": 12.47,
+        "DOUBLE_VARIABLE": 2.86,
+        "DOUBLE_VARIABLE_COMPLEMENTARY": 0.24,
+        "NET": 84.57,
+        "ONSSTOTAL": 20.16,
+        "ONSS_DOUBLE_HOLIDAY": -20.16,
+        "PPTOTAL": 62.22,
+        "SIMPLE_VARIABLE": 0.0
+    }
+}
