@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_zvy_purchase" model="ir.module.category">
+        <field name="name">Purchase</field>
+        <field name="description">Purchase requests, AVL, and product purchase attributes.</field>
+        <field name="sequence">26</field>
+    </record>
+
+    <record id="privilege_zvy_purchase" model="res.groups.privilege">
+        <field name="name">Purchase Requests</field>
+        <field name="description">Purchase requests, AVL, and product purchase attributes.</field>
+        <field name="category_id" ref="module_category_zvy_purchase"/>
+        <field name="sequence">26</field>
+    </record>
+
+    <record id="group_commission_manager" model="res.groups">
+        <field name="name">Commission Manager</field>
+        <field name="privilege_id" ref="privilege_zvy_purchase"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="comment">Can change product purchase type and need-commission flags; read-only access to all purchase requests and commission cases across companies.</field>
+    </record>
+
+    <record id="group_commission_expert" model="res.groups">
+        <field name="name">Commission Expert</field>
+        <field name="privilege_id" ref="privilege_zvy_purchase"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can be assigned on commission cases; sees only assigned cases via the Commission menu.</field>
+    </record>
+
+    <record id="group_commercial_expert" model="res.groups">
+        <field name="name">Commercial Expert</field>
+        <field name="privilege_id" ref="privilege_zvy_purchase"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can be assigned on purchase items as a commercial expert.</field>
+    </record>
+
+    <record id="group_planner" model="res.groups">
+        <field name="name">Planner</field>
+        <field name="privilege_id" ref="privilege_zvy_purchase"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can create purchase requests and items; sees only own requests.</field>
+    </record>
+
+    <record id="group_commercial_manager" model="res.groups">
+        <field name="name">Commercial Manager</field>
+        <field name="privilege_id" ref="privilege_zvy_purchase"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="comment">Can create purchase requests and items; sees all requests in the company.</field>
+    </record>
+
+    <!--
+        Holding-wide: PR-linked approvals often live on a child company while
+        Commission users keep only the parent selected in the company switcher.
+        Soften the Approvals multi-company restrictions so purchase-linked rows
+        remain visible; the group permissions above still apply.
+        Forced via write() because the core accesses are noupdate=1 (also in
+        migrations/1.93/post-migrate.py).
+    -->
+    <function model="ir.access" name="write">
+        <value eval="[ref('approvals.approval_request_rule')]"/>
+        <value eval="{'domain': '[\'|\', (\'company_id\', \'in\', company_ids), (\'zvy_purchase_request_id\', \'!=\', False)]'}"/>
+    </function>
+    <function model="ir.access" name="write">
+        <value eval="[ref('approvals.approval_product_line_rule')]"/>
+        <value eval="{'domain': '[\'|\', (\'company_id\', \'in\', company_ids), (\'approval_request_id.zvy_purchase_request_id\', \'!=\', False)]'}"/>
+    </function>
+    <function model="ir.access" name="write">
+        <value eval="[ref('approvals.approval_approver_rule')]"/>
+        <value eval="{'domain': '[\'|\', (\'company_id\', \'in\', company_ids), (\'request_id.zvy_purchase_request_id\', \'!=\', False)]'}"/>
+    </function>
+</odoo>

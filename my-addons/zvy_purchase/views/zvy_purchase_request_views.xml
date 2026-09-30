@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_zvy_purchase_request_list" model="ir.ui.view">
+        <field name="name">zvy.purchase.request.list</field>
+        <field name="model">zvy.purchase.request</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="create_uid" string="Creator" optional="show"/>
+                <field name="company_id" optional="show"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_review'" decoration-primary="state == 'approval'" decoration-success="state == 'commission'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_request_form" model="ir.ui.view">
+        <field name="name">zvy.purchase.request.form</field>
+        <field name="model">zvy.purchase.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_send"
+                        string="Send"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="not can_edit_items"/>
+                    <button
+                        name="action_assign_expert"
+                        string="Assign Expert"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="state != 'in_review' or all_enquiry_items_selected"/>
+                    <button
+                        name="action_back_to_draft"
+                        string="Back to Draft"
+                        type="object"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="state != 'in_review' or all_enquiry_items_selected"/>
+                    <button
+                        name="action_approval"
+                        string="Approval"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="state != 'in_review' or not all_enquiry_items_selected"/>
+                    <button
+                        name="action_tender_approval"
+                        string="Approval"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not show_tender_approval_button or (state == 'in_review' and all_enquiry_items_selected)"/>
+                    <button
+                        name="action_commission"
+                        string="Commission"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not show_commission_button"/>
+                    <button
+                        name="action_tender"
+                        string="Tender"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not show_tender_button"/>
+                    <button
+                        name="action_create_purchase_order"
+                        string="Create Purchase Order"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not show_create_purchase_order_button"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_review,approval,commission"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_approvals"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-square-o"
+                            invisible="approval_request_count == 0">
+                            <field name="approval_request_count" widget="statinfo" string="Approvals"/>
+                        </button>
+                        <button
+                            name="action_view_commission_cases"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-percent"
+                            invisible="commission_case_count == 0">
+                            <field name="commission_case_count" widget="statinfo" string="Commission"/>
+                        </button>
+                        <button
+                            name="action_view_tenders"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-gavel"
+                            invisible="tender_count == 0">
+                            <field name="tender_count" widget="statinfo" string="Tenders"/>
+                        </button>
+                        <button
+                            name="action_view_purchase_orders"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-shopping-cart"
+                            invisible="purchase_order_count == 0">
+                            <field name="purchase_order_count" widget="statinfo" string="Purchase Orders"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Purchase Request"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="company_id" readonly="1"/>
+                        <field name="create_uid" string="Creator" readonly="1"/>
+                        <field name="can_edit_items" invisible="1"/>
+                        <field name="all_enquiry_items_selected" invisible="1"/>
+                        <field name="show_tender_approval_button" invisible="1"/>
+                        <field name="show_commission_button" invisible="1"/>
+                        <field name="show_tender_button" invisible="1"/>
+                        <field name="show_create_purchase_order_button" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                    <group
+                        string="Approval Summary"
+                        invisible="not all_enquiry_items_selected">
+                        <group>
+                            <field name="operational_amount"/>
+                            <field name="operational_request_type"/>
+                        </group>
+                        <group>
+                            <field name="non_operational_amount"/>
+                            <field name="non_operational_request_type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Purchase Items" name="purchase_items">
+                            <field name="item_ids" widget="zvy_open_form_one2many" readonly="not can_edit_items">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="allowed_uom_ids" column_invisible="1"/>
+                                    <field name="product_uom_id"/>
+                                    <field name="purchase_type_display"/>
+                                    <field name="commercial_expert_ids" widget="many2many_tags" optional="show" readonly="1"/>
+                                    <field name="offer_count" string="Offers"/>
+                                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'submitted'" decoration-success="state == 'in_review'" decoration-muted="state == 'tendering'" decoration-primary="state == 'selected'" decoration-danger="state == 'ordered'" optional="show"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Approvals" name="approvals">
+                            <field name="approval_request_ids" readonly="1" create="0" delete="0">
+                                <list create="0" delete="0" open_form_view="1">
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="request_status" widget="badge"/>
+                                    <field name="amount" optional="show"/>
+                                    <field name="request_owner_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Commission" name="commission">
+                            <field name="commission_case_ids" readonly="1" create="0" delete="0">
+                                <list create="0" delete="0" open_form_view="1">
+                                    <field name="name"/>
+                                    <field name="company_id"/>
+                                    <field name="state" widget="badge"/>
+                                    <field name="item_count" string="Items"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Tender" name="tender">
+                            <field name="tender_ids" readonly="1" create="0" delete="0">
+                                <list create="0" delete="0" open_form_view="1">
+                                    <field name="name"/>
+                                    <field name="company_id"/>
+                                    <field name="item_count" string="Items"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Purchase Orders" name="purchase_orders">
+                            <field name="purchase_order_ids" readonly="1" create="0" delete="0">
+                                <list create="0" delete="0" open_form_view="1">
+                                    <field name="name"/>
+                                    <field name="company_id"/>
+                                    <field name="item_count" string="Items"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_item_list" model="ir.ui.view">
+        <field name="name">zvy.purchase.item.list</field>
+        <field name="model">zvy.purchase.item</field>
+        <field name="arch" type="xml">
+            <list create="0" delete="0">
+                <field name="name"/>
+                <field name="request_id"/>
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="product_uom_id"/>
+                <field name="purchase_type_display"/>
+                <field name="commercial_expert_ids" widget="many2many_tags" optional="show"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'submitted'" decoration-success="state == 'in_review'" decoration-muted="state == 'tendering'" decoration-primary="state == 'selected'" decoration-danger="state == 'ordered'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_item_search" model="ir.ui.view">
+        <field name="name">zvy.purchase.item.search</field>
+        <field name="model">zvy.purchase.item</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="request_id"/>
+                <field name="product_id"/>
+                <field name="commercial_expert_ids"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_submitted" string="Submitted" domain="[('state', '=', 'submitted')]"/>
+                <filter name="filter_in_review" string="In Review" domain="[('state', '=', 'in_review')]"/>
+                <filter name="filter_selected" string="Selected" domain="[('state', '=', 'selected')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_item_form" model="ir.ui.view">
+        <field name="name">zvy.purchase.item.form</field>
+        <field name="model">zvy.purchase.item</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Item">
+                <header>
+                    <button
+                        name="action_submit_offers"
+                        string="Submit"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="not can_submit_offers"/>
+                    <button
+                        name="action_validate_offers"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not can_validate_offers"/>
+                    <button
+                        name="action_select_offers"
+                        string="Select"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not can_select_offers"/>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,submitted,in_review,selected"
+                        invisible="purchase_type_display == 'tendering'"/>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,submitted,in_review,tendering,selected,ordered"
+                        invisible="purchase_type_display != 'tendering'"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field
+                            name="request_id"
+                            readonly="1"
+                            force_save="1"
+                            options="{'no_create': True, 'no_create_edit': True}"/>
+                        <field name="request_state" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="can_edit" invisible="1"/>
+                        <field name="can_assign_experts" invisible="1"/>
+                        <field name="can_add_offers" invisible="1"/>
+                        <field name="can_submit_offers" invisible="1"/>
+                        <field name="can_validate_offers" invisible="1"/>
+                        <field name="can_select_offers" invisible="1"/>
+                        <field name="product_id" readonly="not can_edit"/>
+                        <field name="product_qty" readonly="not can_edit"/>
+                        <field name="allowed_uom_ids" invisible="1"/>
+                        <field name="product_uom_id" readonly="not can_edit"/>
+                        <field name="purchase_type_display" readonly="1"/>
+                        <field
+                            name="commercial_expert_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True, 'no_create_edit': True}"
+                            readonly="not can_assign_experts"/>
+                    </group>
+                    <notebook>
+                        <page string="Offers" name="offers">
+                            <field
+                                name="offer_ids"
+                                widget="zvy_open_form_one2many"
+                                readonly="not can_add_offers">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="create_uid" string="Creator" optional="show"/>
+                                    <field name="can_edit" column_invisible="1"/>
+                                    <field name="show_commercial_fields" column_invisible="1"/>
+                                    <field name="vendor_id" readonly="not can_edit"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="unit_price" readonly="not can_edit" invisible="not show_commercial_fields"/>
+                                    <field name="quantity" readonly="not can_edit" invisible="not show_commercial_fields"/>
+                                    <field name="total_price" invisible="not show_commercial_fields"/>
+                                    <field name="discount_percent_per_unit" readonly="not can_edit" invisible="not show_commercial_fields"/>
+                                    <field name="final_price" invisible="not show_commercial_fields"/>
+                                    <field name="deliver_time" optional="hide" readonly="not can_edit" invisible="not show_commercial_fields"/>
+                                    <field name="payment_method" optional="hide" readonly="not can_edit" invisible="not show_commercial_fields"/>
+                                    <field name="payment_duration" optional="hide" readonly="not can_edit" invisible="not show_commercial_fields"/>
+                                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_review'" decoration-success="state == 'validated'" decoration-primary="state in ('selected', 'opened')" decoration-danger="state == 'rejected'" decoration-muted="state in ('closed', 'bid')" optional="show"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_offer_list" model="ir.ui.view">
+        <field name="name">zvy.purchase.offer.list</field>
+        <field name="model">zvy.purchase.offer</field>
+        <field name="arch" type="xml">
+            <list create="0">
+                <field name="name"/>
+                <field name="item_id"/>
+                <field name="product_id"/>
+                <field name="create_uid" string="Creator" optional="show"/>
+                <field name="vendor_id"/>
+                <field name="show_commercial_fields" column_invisible="1"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="unit_price" invisible="not show_commercial_fields"/>
+                <field name="quantity" invisible="not show_commercial_fields"/>
+                <field name="total_price" invisible="not show_commercial_fields"/>
+                <field name="discount_percent_per_unit" optional="hide" invisible="not show_commercial_fields"/>
+                <field name="final_price" invisible="not show_commercial_fields"/>
+                <field name="deliver_time" optional="hide" invisible="not show_commercial_fields"/>
+                <field name="payment_method" optional="hide" invisible="not show_commercial_fields"/>
+                <field name="payment_duration" optional="hide" invisible="not show_commercial_fields"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_review'" decoration-success="state == 'validated'" decoration-primary="state in ('selected', 'opened')" decoration-danger="state == 'rejected'" decoration-muted="state in ('closed', 'bid')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_offer_search" model="ir.ui.view">
+        <field name="name">zvy.purchase.offer.search</field>
+        <field name="model">zvy.purchase.offer</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="item_id"/>
+                <field name="product_id"/>
+                <field name="vendor_id"/>
+                <field name="create_uid" string="Creator"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_in_review" string="In Review" domain="[('state', '=', 'in_review')]"/>
+                <filter name="filter_validated" string="Validated" domain="[('state', '=', 'validated')]"/>
+                <filter name="filter_bid" string="Bid" domain="[('state', '=', 'bid')]"/>
+                <filter name="filter_opened" string="Opened" domain="[('state', '=', 'opened')]"/>
+                <filter name="filter_selected" string="Selected" domain="[('state', '=', 'selected')]"/>
+                <filter name="filter_rejected" string="Rejected" domain="[('state', '=', 'rejected')]"/>
+                <filter name="filter_closed" string="Closed" domain="[('state', '=', 'closed')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_offer_form" model="ir.ui.view">
+        <field name="name">zvy.purchase.offer.form</field>
+        <field name="model">zvy.purchase.offer</field>
+        <field name="arch" type="xml">
+            <form string="Offer">
+                <header>
+                    <button
+                        name="action_submit"
+                        string="Submit"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="not can_submit"/>
+                    <button
+                        name="action_validate"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="state != 'in_review'"/>
+                    <button
+                        name="action_reject"
+                        string="Reject"
+                        type="object"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="state != 'in_review'"/>
+                    <button
+                        name="action_select_offers"
+                        string="Select"
+                        type="object"
+                        class="oe_highlight"
+                        groups="zvy_purchase.group_commercial_manager"
+                        invisible="not can_select_offers"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_review,validated,selected" invisible="state != 'selected'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_review,validated,closed" invisible="state != 'closed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_review,validated,bid,opened" invisible="state not in ('bid', 'opened')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_review,validated" invisible="state != 'validated'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_review,validated,rejected" invisible="state in ('validated', 'selected', 'closed', 'bid', 'opened')"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="can_edit" invisible="1"/>
+                            <field name="can_submit" invisible="1"/>
+                            <field name="can_select_offers" invisible="1"/>
+                            <field name="show_commercial_fields" invisible="1"/>
+                            <field name="item_id" readonly="1" force_save="1"/>
+                            <field name="product_id" readonly="1" string="Product"/>
+                            <field name="create_uid" string="Creator" readonly="1"/>
+                            <field name="allowed_vendor_ids" invisible="1"/>
+                            <field
+                                name="vendor_id"
+                                readonly="not can_edit"
+                                context="{'default_is_company': True, 'zvy_avl_product_id': product_id}"/>
+                        </group>
+                        <group invisible="not show_commercial_fields">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="unit_price" readonly="not can_edit"/>
+                            <field name="quantity" readonly="not can_edit"/>
+                            <field name="total_price"/>
+                            <field
+                                name="discount_percent_per_unit"
+                                widget="percentage"
+                                readonly="not can_edit"/>
+                            <field name="final_price"/>
+                        </group>
+                    </group>
+                    <group string="Payment &amp; Delivery" invisible="not show_commercial_fields">
+                        <group>
+                            <field name="payment_method" readonly="not can_edit"/>
+                            <field name="payment_duration" readonly="not can_edit"/>
+                        </group>
+                        <group>
+                            <field name="deliver_time" readonly="not can_edit"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_zvy_purchase_request_search" model="ir.ui.view">
+        <field name="name">zvy.purchase.request.search</field>
+        <field name="model">zvy.purchase.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_in_review" string="In Review" domain="[('state', '=', 'in_review')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_zvy_purchase_request" model="ir.actions.act_window">
+        <field name="name">Purchase Requests</field>
+        <field name="res_model">zvy.purchase.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_zvy_purchase_request_list"/>
+        <field name="search_view_id" ref="view_zvy_purchase_request_search"/>
+        <field name="group_ids" eval="[(4, ref('group_planner')), (4, ref('group_commercial_manager'))]"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_zvy_purchase_request_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_zvy_purchase_request_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a purchase request
+            </p>
+        </field>
+    </record>
+
+    <record id="action_zvy_purchase_item_to_review" model="ir.actions.act_window">
+        <field name="name">To Review</field>
+        <field name="res_model">zvy.purchase.item</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('commercial_expert_ids', 'in', uid)]</field>
+        <field name="context">{'create': False}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_zvy_purchase_item_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_zvy_purchase_item_form')})]"/>
+        <field name="search_view_id" ref="view_zvy_purchase_item_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No purchase items assigned to you
+            </p>
+        </field>
+    </record>
+
+    <!-- CE: own offers (domain). CM: company offers via record rule. -->
+    <record id="action_zvy_purchase_offer" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="res_model">zvy.purchase.offer</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'create': False, 'zvy_offers_menu': True}</field>
+        <field name="group_ids" eval="[(4, ref('group_commercial_expert')), (4, ref('group_commercial_manager'))]"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_zvy_purchase_offer_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_zvy_purchase_offer_form')})]"/>
+        <field name="search_view_id" ref="view_zvy_purchase_offer_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No offers to display
+            </p>
+        </field>
+    </record>
+
+    <record id="menu_zvy_purchase_root" model="ir.ui.menu">
+        <field name="name">Purchase</field>
+        <field name="sequence">140</field>
+        <field name="action" eval="False"/>
+        <field name="web_icon">zvy_purchase,static/description/icon.png</field>
+        <field name="group_ids" eval="[(6, 0, [
+            ref('group_planner'),
+            ref('group_commercial_manager'),
+            ref('group_commercial_expert'),
+            ref('group_commission_manager'),
+            ref('group_commission_expert'),
+        ])]"/>
+    </record>
+
+    <menuitem
+        id="menu_zvy_purchase_request"
+        name="Purchase Requests"
+        parent="menu_zvy_purchase_root"
+        action="action_zvy_purchase_request"
+        sequence="10"/>
+
+    <!-- Force-replace groups: menuitem @groups can leave stale links on upgrade. -->
+    <record id="menu_zvy_purchase_request" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_planner'), ref('group_commercial_manager')])]"/>
+    </record>
+    <menuitem
+        id="menu_zvy_purchase_item_to_review"
+        name="To Review"
+        parent="menu_zvy_purchase_root"
+        action="action_zvy_purchase_item_to_review"
+        groups="zvy_purchase.group_commercial_expert"
+        sequence="20"/>
+    <menuitem
+        id="menu_zvy_purchase_offer"
+        name="Offers"
+        parent="menu_zvy_purchase_root"
+        action="action_zvy_purchase_offer"
+        groups="zvy_purchase.group_commercial_expert,zvy_purchase.group_commercial_manager"
+        sequence="25"/>
+    <record id="menu_zvy_purchase_offer" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_commercial_expert'), ref('group_commercial_manager')])]"/>
+    </record>
+</odoo>
