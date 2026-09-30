@@ -1,0 +1,73 @@
+id,name,model_id,group_id/id,operation,domain
+access_zvy_purchase_request_planner,Purchase Request: Planner own,zvy.purchase.request,zvy_purchase.group_planner,crud,"['&', ('create_uid', '=', user.id), ('company_id', 'in', company_ids)]"
+access_zvy_purchase_request_commercial_manager,Purchase Request: Commercial Manager company,zvy.purchase.request,zvy_purchase.group_commercial_manager,crud,"[('company_id', 'in', company_ids)]"
+access_zvy_purchase_request_commercial_expert,Purchase Request: Commercial Expert assigned item,zvy.purchase.request,zvy_purchase.group_commercial_expert,r,"[('item_ids.commercial_expert_ids', 'in', user.id)]"
+access_zvy_purchase_request_approver,Purchase Request: Approval sequence approver,zvy.purchase.request,base.group_user,r,"[('approval_request_ids.approver_ids.user_id', '=', user.id)]"
+access_zvy_purchase_request_commission_manager,Purchase Request: Commission Manager all companies,zvy.purchase.request,zvy_purchase.group_commission_manager,r,
+access_zvy_purchase_request_commission_expert,Purchase Request: Commission Expert assigned case or tender,zvy.purchase.request,zvy_purchase.group_commission_expert,r,"['|', ('commission_case_ids.commission_expert_ids', 'in', user.id), ('tender_ids.commission_expert_id', '=', user.id)]"
+access_zvy_purchase_item_planner,Purchase Item: Planner own request,zvy.purchase.item,zvy_purchase.group_planner,crud,"['&', ('request_id.create_uid', '=', user.id), ('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_item_commercial_manager,Purchase Item: Commercial Manager company request,zvy.purchase.item,zvy_purchase.group_commercial_manager,crud,"[('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_item_commercial_expert,Purchase Item: Commercial Expert assigned,zvy.purchase.item,zvy_purchase.group_commercial_expert,ru,"[('commercial_expert_ids', 'in', user.id)]"
+access_zvy_purchase_item_approver,Purchase Item: Approval sequence approver,zvy.purchase.item,base.group_user,r,"[('request_id.approval_request_ids.approver_ids.user_id', '=', user.id)]"
+access_zvy_purchase_item_commission_manager,Purchase Item: Commission Manager all companies,zvy.purchase.item,zvy_purchase.group_commission_manager,r,
+access_zvy_purchase_item_commission_expert,Purchase Item: Commission Expert assigned case or tender,zvy.purchase.item,zvy_purchase.group_commission_expert,r,"['|', ('request_id.commission_case_ids.commission_expert_ids', 'in', user.id), ('request_id.tender_ids.commission_expert_id', '=', user.id)]"
+access_zvy_purchase_item_portal,Purchase Item: Portal vendor on published tender,zvy.purchase.item,base.group_portal,r,"[('tender_ids.state', '=', 'published'), ('offer_ids', 'any', [('state', 'in', ['validated', 'bid']), ('vendor_id', 'child_of', [user.commercial_partner_id.id])])]"
+access_zvy_purchase_offer_planner,Offer: Planner own request,zvy.purchase.offer,zvy_purchase.group_planner,r,"['&', ('item_id.request_id.create_uid', '=', user.id), ('item_id.request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_offer_commercial_manager,Offer: Commercial Manager company request,zvy.purchase.offer,zvy_purchase.group_commercial_manager,crud,"[('item_id.request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_offer_commercial_expert,Offer: Commercial Expert assigned item,zvy.purchase.offer,zvy_purchase.group_commercial_expert,crud,"[('item_id.commercial_expert_ids', 'in', user.id)]"
+access_zvy_purchase_offer_approver,Offer: Approval sequence approver,zvy.purchase.offer,base.group_user,r,"[('item_id.request_id.approval_request_ids.approver_ids.user_id', '=', user.id)]"
+access_zvy_purchase_offer_commission_manager,Offer: Commission Manager all companies,zvy.purchase.offer,zvy_purchase.group_commission_manager,r,
+access_zvy_purchase_offer_commission_expert,Offer: Commission Expert assigned case or tender,zvy.purchase.offer,zvy_purchase.group_commission_expert,r,"['|', ('item_id.request_id.commission_case_ids.commission_expert_ids', 'in', user.id), ('item_id.request_id.tender_ids.commission_expert_id', '=', user.id)]"
+access_zvy_purchase_offer_portal,Offer: Portal vendor validated or bid on published tender,zvy.purchase.offer,base.group_portal,ru,"[('state', 'in', ['validated', 'bid']), ('vendor_id', 'child_of', [user.commercial_partner_id.id]), ('item_id.tender_ids.state', '=', 'published')]"
+access_zvy_purchase_commission_case_commercial_manager,Commission Case: Commercial Manager company request,zvy.purchase.commission.case,zvy_purchase.group_commercial_manager,cru,"[('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_commission_case_commission_manager,Commission Case: Commission Manager all companies,zvy.purchase.commission.case,zvy_purchase.group_commission_manager,ru,
+access_zvy_purchase_commission_case_planner,Commission Case: request creator,zvy.purchase.commission.case,zvy_purchase.group_planner,r,"['&', ('request_id.create_uid', '=', user.id), ('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_commission_case_commission_expert,Commission Case: Commission Expert assigned,zvy.purchase.commission.case,zvy_purchase.group_commission_expert,r,"[('commission_expert_ids', 'in', user.id)]"
+access_zvy_purchase_commission_case_approver,Commission Case: Approval sequence approver,zvy.purchase.commission.case,base.group_user,r,"[('request_id.approval_request_ids.approver_ids.user_id', '=', user.id)]"
+access_zvy_purchase_tender_commercial_manager,Tender: Commercial Manager company request,zvy.purchase.tender,zvy_purchase.group_commercial_manager,cru,"[('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_tender_commission_manager,Tender: Commission Manager all companies,zvy.purchase.tender,zvy_purchase.group_commission_manager,ru,
+access_zvy_purchase_tender_planner,Tender: request creator,zvy.purchase.tender,zvy_purchase.group_planner,r,"['&', ('request_id.create_uid', '=', user.id), ('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_tender_commission_expert,Tender: Commission Expert assigned tender or case on request,zvy.purchase.tender,zvy_purchase.group_commission_expert,ru,"['|', ('commission_expert_id', '=', user.id), ('request_id.commission_case_ids.commission_expert_ids', 'in', user.id)]"
+access_zvy_purchase_tender_approver,Tender: Approval sequence approver,zvy.purchase.tender,base.group_user,r,"[('request_id.approval_request_ids.approver_ids.user_id', '=', user.id)]"
+access_zvy_purchase_tender_portal,Tender: Portal vendor published with validated or bid offer,zvy.purchase.tender,base.group_portal,r,"[('state', '=', 'published'), ('item_ids.offer_ids', 'any', [('state', 'in', ['validated', 'bid']), ('vendor_id', 'child_of', [user.commercial_partner_id.id])])]"
+access_zvy_purchase_order_commercial_manager,Purchase Order: Commercial Manager company request,zvy.purchase.order,zvy_purchase.group_commercial_manager,cru,"[('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_order_planner,Purchase Order: request creator,zvy.purchase.order,zvy_purchase.group_planner,r,"['&', ('request_id.create_uid', '=', user.id), ('request_id.company_id', 'in', company_ids)]"
+access_zvy_purchase_order_commission_manager,Purchase Order: Commission Manager all companies,zvy.purchase.order,zvy_purchase.group_commission_manager,r,
+access_zvy_purchase_order_commission_expert,Purchase Order: Commission Expert assigned case or tender,zvy.purchase.order,zvy_purchase.group_commission_expert,r,"['|', ('request_id.commission_case_ids.commission_expert_ids', 'in', user.id), ('request_id.tender_ids.commission_expert_id', '=', user.id)]"
+access_zvy_purchase_order_approver,Purchase Order: Approval sequence approver,zvy.purchase.order,base.group_user,r,"[('request_id.approval_request_ids.approver_ids.user_id', '=', user.id)]"
+access_zvy_purchase_avl_user,AVL: internal user,zvy.purchase.avl,base.group_user,crud,
+access_zvy_purchase_scale_user,Purchase Scale: internal user,zvy.purchase.scale,base.group_user,r,
+access_zvy_purchase_scale_commercial_manager,Purchase Scale: Commercial Manager,zvy.purchase.scale,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_scale_system,Purchase Scale: system,zvy.purchase.scale,base.group_system,crud,
+access_zvy_purchase_scale_rule_user,Purchase Scale Rule: internal user,zvy.purchase.scale.rule,base.group_user,r,
+access_zvy_purchase_scale_rule_commercial_manager,Purchase Scale Rule: Commercial Manager,zvy.purchase.scale.rule,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_scale_rule_system,Purchase Scale Rule: system,zvy.purchase.scale.rule,base.group_system,crud,
+access_zvy_purchase_dashboard_planner,Purchase Dashboard: Planner,zvy.purchase.dashboard,zvy_purchase.group_planner,r,
+access_zvy_purchase_dashboard_commercial_manager,Purchase Dashboard: Commercial Manager,zvy.purchase.dashboard,zvy_purchase.group_commercial_manager,r,
+access_zvy_purchase_dashboard_commercial_expert,Purchase Dashboard: Commercial Expert,zvy.purchase.dashboard,zvy_purchase.group_commercial_expert,r,
+access_zvy_purchase_dashboard_commission_manager,Purchase Dashboard: Commission Manager,zvy.purchase.dashboard,zvy_purchase.group_commission_manager,r,
+access_zvy_purchase_dashboard_commission_expert,Purchase Dashboard: Commission Expert,zvy.purchase.dashboard,zvy_purchase.group_commission_expert,r,
+access_zvy_purchase_assign_expert_wizard_cm,Assign Expert Wizard: Commercial Manager,zvy.purchase.assign.expert.wizard,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_assign_expert_wizard_line_cm,Assign Expert Wizard Line: Commercial Manager,zvy.purchase.assign.expert.wizard.line,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_assign_commission_expert_wizard_cm,Assign Commission Expert Wizard: Commission Manager,zvy.purchase.assign.commission.expert.wizard,zvy_purchase.group_commission_manager,crud,
+access_zvy_purchase_commission_case_status_wizard_cm,Commission Case Status Wizard: Commission Manager,zvy.purchase.commission.case.status.wizard,zvy_purchase.group_commission_manager,crud,
+access_zvy_purchase_assign_tender_expert_wizard_cm,Assign Tender Expert Wizard: Commission Manager,zvy.purchase.assign.tender.expert.wizard,zvy_purchase.group_commission_manager,crud,
+access_zvy_purchase_schedule_tender_wizard_ce,Schedule Tender Wizard: Commission Expert,zvy.purchase.schedule.tender.wizard,zvy_purchase.group_commission_expert,crud,
+access_zvy_purchase_back_to_draft_wizard_cm,Back To Draft Wizard: Commercial Manager,zvy.purchase.back.to.draft.wizard,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_offer_reject_wizard_cm,Offer Reject Wizard: Commercial Manager,zvy.purchase.offer.reject.wizard,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_offer_select_wizard_cm,Offer Select Wizard: Commercial Manager,zvy.purchase.offer.select.wizard,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_offer_select_reason_wizard_cm,Offer Select Reason Wizard: Commercial Manager,zvy.purchase.offer.select.reason.wizard,zvy_purchase.group_commercial_manager,crud,
+access_zvy_purchase_tender_select_wizard_cm,Tender Select Wizard: Commission Manager,zvy.purchase.tender.select.wizard,zvy_purchase.group_commission_manager,crud,
+access_zvy_purchase_tender_select_wizard_line_cm,Tender Select Wizard Line: Commission Manager,zvy.purchase.tender.select.wizard.line,zvy_purchase.group_commission_manager,crud,
+access_zvy_purchase_order_create_wizard_cm,Purchase Order Create Wizard: Commercial Manager,zvy.purchase.order.create.wizard,zvy_purchase.group_commercial_manager,crud,
+access_product_product_commission_manager,Product: Commission Manager,product.product,zvy_purchase.group_commission_manager,ru,
+access_product_product_portal,Product: portal,product.product,base.group_portal,r,
+access_uom_uom_portal,Unit of Measure: portal,uom.uom,base.group_portal,r,
+access_res_company_commission_manager,Company: Commission Manager all companies,res.company,zvy_purchase.group_commission_manager,r,
+access_res_company_commission_expert,Company: Commission Expert all companies,res.company,zvy_purchase.group_commission_expert,r,
+access_approval_request_commission_manager,Approval Request: Commission Manager purchase-linked,approval.request,zvy_purchase.group_commission_manager,r,"[('zvy_purchase_request_id', '!=', False)]"
+access_approval_request_commission_expert,Approval Request: Commission Expert assigned case or tender PR,approval.request,zvy_purchase.group_commission_expert,r,"['|', ('zvy_purchase_request_id.commission_case_ids.commission_expert_ids', 'in', user.id), ('zvy_purchase_request_id.tender_ids.commission_expert_id', '=', user.id)]"
+access_approval_product_line_commission_manager,Approval Product Line: Commission Manager purchase-linked,approval.product.line,zvy_purchase.group_commission_manager,r,"[('approval_request_id.zvy_purchase_request_id', '!=', False)]"
+access_approval_product_line_commission_expert,Approval Product Line: Commission Expert assigned case or tender PR,approval.product.line,zvy_purchase.group_commission_expert,r,"['|', ('approval_request_id.zvy_purchase_request_id.commission_case_ids.commission_expert_ids', 'in', user.id), ('approval_request_id.zvy_purchase_request_id.tender_ids.commission_expert_id', '=', user.id)]"
+access_approval_approver_commission_manager,Approval Approver: Commission Manager purchase-linked,approval.approver,zvy_purchase.group_commission_manager,r,"[('request_id.zvy_purchase_request_id', '!=', False)]"
+access_approval_approver_commission_expert,Approval Approver: Commission Expert assigned case or tender PR,approval.approver,zvy_purchase.group_commission_expert,r,"['|', ('request_id.zvy_purchase_request_id.commission_case_ids.commission_expert_ids', 'in', user.id), ('request_id.zvy_purchase_request_id.tender_ids.commission_expert_id', '=', user.id)]"

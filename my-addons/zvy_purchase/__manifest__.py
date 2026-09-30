@@ -1,0 +1,79 @@
+{
+    "name": "Purchase Request",
+    "version": "1.98",
+    "category": "Inventory/Purchase",
+    "summary": "Purchase requests with items and vendor offers",
+    "depends": [
+        "product",
+        "mail",
+        "web",
+        "approvals",
+        "portal",
+        "artarad_web_persian_calendar",
+    ],
+    "data": [
+        "security/zvy_purchase_security.xml",
+        "security/ir.access.csv",
+        "data/ir_sequence_data.xml",
+        "data/zvy_purchase_scale_data.xml",
+        "data/portal_entry_data.xml",
+        "views/zvy_purchase_request_views.xml",
+        "views/zvy_purchase_dashboard_views.xml",
+        "views/zvy_purchase_commission_case_views.xml",
+        "views/zvy_purchase_tender_views.xml",
+        "views/zvy_purchase_order_views.xml",
+        "views/zvy_purchase_avl_views.xml",
+        "views/zvy_purchase_scale_views.xml",
+        "views/product_product_views.xml",
+        "views/res_company_views.xml",
+        "views/approval_request_views.xml",
+        "views/portal_templates.xml",
+        "wizard/zvy_purchase_assign_expert_wizard_views.xml",
+        "wizard/zvy_purchase_assign_commission_expert_wizard_views.xml",
+        "wizard/zvy_purchase_assign_tender_expert_wizard_views.xml",
+        "wizard/zvy_purchase_schedule_tender_wizard_views.xml",
+        "wizard/zvy_purchase_back_to_draft_wizard_views.xml",
+        "wizard/zvy_purchase_offer_reject_wizard_views.xml",
+        "wizard/zvy_purchase_offer_select_wizard_views.xml",
+        "wizard/zvy_purchase_offer_select_reason_wizard_views.xml",
+        "wizard/zvy_purchase_tender_select_wizard_views.xml",
+        "wizard/zvy_purchase_order_create_wizard_views.xml",
+        "wizard/zvy_purchase_commission_case_status_wizard_views.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "zvy_purchase/static/src/js/purchase_item_one2many.js",
+            "zvy_purchase/static/src/js/purchase_dashboard.js",
+            "zvy_purchase/static/src/xml/purchase_dashboard.xml",
+            "zvy_purchase/static/src/scss/purchase_dashboard.scss",
+        ],
+        # Must run before session.js deletes odoo.__session_info__ (minimal bundle).
+        "web.assets_frontend_minimal": [
+            (
+                "before",
+                "web/static/src/session.js",
+                "zvy_purchase/static/src/js/portal_calendar_type.js",
+            ),
+        ],
+        "web.assets_frontend": [
+            # Jalali date formats / picker on portal (artarad patches are backend-only
+            # by default, web.assets_frontend does not include web._assets_core).
+            # dates.js replaces exported functions, so it must be declared before the
+            # modules importing them: the loader starts jobs in bundle order.
+            (
+                "after",
+                "web/static/src/module_loader.js",
+                "artarad_web_persian_calendar/static/src/js/dates.js",
+            ),
+            (
+                "after",
+                "web/static/src/core/datetime/datetime_picker.js",
+                "artarad_web_persian_calendar/static/src/js/datetimepicker/datetime_picker.js",
+            ),
+            "zvy_purchase/static/src/js/portal_tender_form.js",
+        ],
+    },
+    "application": True,
+    "installable": True,
+    "license": "LGPL-3",
+}
