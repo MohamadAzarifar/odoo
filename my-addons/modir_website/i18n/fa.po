@@ -1,0 +1,281 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* modir_website
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-01 10:01+0000\n"
+"PO-Revision-Date: 2026-10-01 10:05+0000\n"
+"Last-Translator: Modir.Digital\n"
+"Language-Team: Persian\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+
+#. module: modir_website
+#: model:ir.module.module,description:base.module_modir_website
+msgid ""
+"\n"
+"Modern bilingual (Persian / English) homepage for Modir.Digital.\n"
+"Covers ERP, KM, DMS, CRM, PM, PLM, MRP consultancy and products.\n"
+msgstr ""
+"\n"
+"صفحه اصلی دوزبانه (فارسی / انگلیسی) برای Modir.Digital.\n"
+"مشاوره و محصولات ERP، KM، DMS، CRM، PM، PLM و MRP.\n"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "<span class=\"modir-offer__index\">01</span>"
+msgstr "<span class=\"modir-offer__index\">۰۱</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "<span class=\"modir-offer__index\">02</span>"
+msgstr "<span class=\"modir-offer__index\">۰۲</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<span>ERP</span>\n"
+"                        <span>KM</span>\n"
+"                        <span>DMS</span>\n"
+"                        <span>CRM</span>\n"
+"                        <span>PM</span>\n"
+"                        <span>PLM</span>\n"
+"                        <span>MRP</span>"
+msgstr ""
+"<span>ERP</span>\n"
+"                        <span>KM</span>\n"
+"                        <span>DMS</span>\n"
+"                        <span>CRM</span>\n"
+"                        <span>PM</span>\n"
+"                        <span>PLM</span>\n"
+"                        <span>MRP</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>CRM</strong>\n"
+"                                <span>Customer Relationship</span>"
+msgstr ""
+"<strong>CRM</strong>\n"
+"                                <span>مدیریت ارتباط با مشتری</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>DMS</strong>\n"
+"                                <span>Document Management</span>"
+msgstr ""
+"<strong>DMS</strong>\n"
+"                                <span>مدیریت اسناد</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>ERP</strong>\n"
+"                                <span>Enterprise Resource Planning</span>"
+msgstr ""
+"<strong>ERP</strong>\n"
+"                                <span>برنامه‌ریزی منابع سازمانی</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>KM</strong>\n"
+"                                <span>Knowledge Management</span>"
+msgstr ""
+"<strong>KM</strong>\n"
+"                                <span>مدیریت دانش</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>MRP</strong>\n"
+"                                <span>Manufacturing Planning</span>"
+msgstr ""
+"<strong>MRP</strong>\n"
+"                                <span>برنامه‌ریزی تولید</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>PLM</strong>\n"
+"                                <span>Product Lifecycle</span>"
+msgstr ""
+"<strong>PLM</strong>\n"
+"                                <span>چرخه عمر محصول</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"<strong>PM</strong>\n"
+"                                <span>Project Management</span>"
+msgstr ""
+"<strong>PM</strong>\n"
+"                                <span>مدیریت پروژه</span>"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Adopt &amp; improve"
+msgstr "به‌کارگیری و بهبود"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"Architecture, configuration, and products aligned to how your teams work."
+msgstr "معماری، پیکربندی و محصولاتی هم‌راستا با شیوه کار تیم‌های شما."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Book a consultation"
+msgstr "دریافت مشاوره"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Capabilities"
+msgstr "توانمندی‌ها"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Consultancy"
+msgstr "مشاوره"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"Consultancy and products for ERP, knowledge, documents,\n"
+"                            customers, projects, products, and manufacturing —\n"
+"                            so your organization runs as one."
+msgstr ""
+"مشاوره و محصولات برای ERP، مدیریت دانش، اسناد،\n"
+"                            مشتریان، پروژه‌ها، محصول و تولید —\n"
+"                            تا سازمان شما یکپارچه کار کند."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Design &amp; deliver"
+msgstr "طراحی و اجرا"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"Discovery, process design, vendor selection, implementation\n"
+"                                    oversight, and change management for enterprise platforms."
+msgstr ""
+"شناخت نیاز، طراحی فرآیند، انتخاب راهکار، نظارت بر پیاده‌سازی\n"
+"                                    و مدیریت تغییر برای سامانه‌های سازمانی."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"Enterprise systems,<br/>\n"
+"                            made clear."
+msgstr ""
+"سامانه‌های سازمانی،<br/>\n"
+"                            شفاف و یکپارچه."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Explore capabilities"
+msgstr "مشاهده توانمندی‌ها"
+
+#. module: modir_website
+#: model:ir.module.module,summary:base.module_modir_website
+msgid "Homepage for Modir.Digital — enterprise management consultancy & products"
+msgstr "صفحه اصلی Modir.Digital — مشاوره و محصولات مدیریت سازمانی"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "How we work"
+msgstr "نحوه همکاری"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Listen &amp; map"
+msgstr "شنیدن و نقشه‌برداری"
+
+#. module: modir_website
+#: model:ir.module.module,shortdesc:base.module_modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Modir.Digital"
+msgstr "Modir.Digital"
+
+#. module: modir_website
+#: model:ir.module.module,shortdesc:base.module_modir_website
+msgid "Modir.Digital Website"
+msgstr "وب‌سایت Modir.Digital"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Modules"
+msgstr "ماژول‌ها"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "One partnership covering the stack your teams actually use."
+msgstr "یک همکاری برای تمام سامانه‌هایی که تیم‌های شما واقعاً استفاده می‌کنند."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Products"
+msgstr "محصولات"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Ready to modernize how your enterprise runs?"
+msgstr "آماده مدرن‌سازی نحوه اداره سازمان خود هستید؟"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"Ready-to-extend modules and solutions across planning,\n"
+"                                    operations, collaboration, and manufacturing control."
+msgstr ""
+"ماژول‌ها و راهکارهای قابل توسعه در برنامه‌ریزی،\n"
+"                                    عملیات، همکاری و کنترل تولید."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Simple process. Serious outcomes."
+msgstr "فرایند ساده. نتایج جدی."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Talk to Modir.Digital"
+msgstr "گفتگو با Modir.Digital"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Tell us where you are today — we will help you choose the right path."
+msgstr "وضعیت امروز خود را بگویید — مسیر درست را با هم انتخاب می‌کنیم."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "The systems that run modern enterprises"
+msgstr "سامانه‌هایی که سازمان‌های مدرن را پیش می‌برند"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Training, handover, and continuous improvement after go-live."
+msgstr "آموزش، تحویل و بهبود مستمر پس از راه‌اندازی."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "Two ways we help enterprises move forward"
+msgstr "دو مسیر برای پیشبرد سازمان‌ها"
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid ""
+"We learn your processes, constraints, and goals before recommending tools."
+msgstr "پیش از پیشنهاد ابزار، فرآیندها، محدودیت‌ها و اهداف شما را می‌شناسیم."
+
+#. module: modir_website
+#: model_terms:ir.ui.view,arch_db:modir_website.homepage
+msgid "What we do"
+msgstr "آنچه انجام می‌دهیم"

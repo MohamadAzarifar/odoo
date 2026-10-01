@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="homepage" inherit_id="website.homepage" name="Modir.Digital Homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure modir-home">
+
+                <!-- Hero -->
+                <section class="modir-hero" data-name="Modir Hero">
+                    <div class="modir-hero__atmosphere" aria-hidden="true">
+                        <div class="modir-hero__grid"/>
+                        <div class="modir-hero__glow modir-hero__glow--a"/>
+                        <div class="modir-hero__glow modir-hero__glow--b"/>
+                    </div>
+                    <div class="container modir-hero__inner">
+                        <p class="modir-hero__brand" data-modir-reveal="1">Modir.Digital</p>
+                        <h1 class="modir-hero__title" data-modir-reveal="2">
+                            Enterprise systems,<br/>
+                            made clear.
+                        </h1>
+                        <p class="modir-hero__lead" data-modir-reveal="3">
+                            Consultancy and products for ERP, knowledge, documents,
+                            customers, projects, products, and manufacturing —
+                            so your organization runs as one.
+                        </p>
+                        <div class="modir-hero__actions" data-modir-reveal="4">
+                            <a href="/contactus" class="modir-btn modir-btn--primary">
+                                Book a consultation
+                            </a>
+                            <a href="#capabilities" class="modir-btn modir-btn--ghost">
+                                Explore capabilities
+                            </a>
+                        </div>
+                    </div>
+                    <div class="modir-hero__modules" data-modir-reveal="5" aria-label="Modules">
+                        <span>ERP</span>
+                        <span>KM</span>
+                        <span>DMS</span>
+                        <span>CRM</span>
+                        <span>PM</span>
+                        <span>PLM</span>
+                        <span>MRP</span>
+                    </div>
+                </section>
+
+                <!-- What we offer -->
+                <section class="modir-offer" id="capabilities" data-name="Modir Offer">
+                    <div class="container">
+                        <header class="modir-section-head">
+                            <p class="modir-eyebrow">What we do</p>
+                            <h2 class="modir-section-title">Two ways we help enterprises move forward</h2>
+                        </header>
+                        <div class="modir-offer__row">
+                            <article class="modir-offer__item">
+                                <span class="modir-offer__index">01</span>
+                                <h3>Consultancy</h3>
+                                <p>
+                                    Discovery, process design, vendor selection, implementation
+                                    oversight, and change management for enterprise platforms.
+                                </p>
+                            </article>
+                            <article class="modir-offer__item">
+                                <span class="modir-offer__index">02</span>
+                                <h3>Products</h3>
+                                <p>
+                                    Ready-to-extend modules and solutions across planning,
+                                    operations, collaboration, and manufacturing control.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domains -->
+                <section class="modir-domains" data-name="Modir Domains">
+                    <div class="container">
+                        <header class="modir-section-head modir-section-head--light">
+                            <p class="modir-eyebrow">Capabilities</p>
+                            <h2 class="modir-section-title">The systems that run modern enterprises</h2>
+                            <p class="modir-section-lead">
+                                One partnership covering the stack your teams actually use.
+                            </p>
+                        </header>
+                        <ul class="modir-domains__list">
+                            <li>
+                                <strong>ERP</strong>
+                                <span>Enterprise Resource Planning</span>
+                            </li>
+                            <li>
+                                <strong>KM</strong>
+                                <span>Knowledge Management</span>
+                            </li>
+                            <li>
+                                <strong>DMS</strong>
+                                <span>Document Management</span>
+                            </li>
+                            <li>
+                                <strong>CRM</strong>
+                                <span>Customer Relationship</span>
+                            </li>
+                            <li>
+                                <strong>PM</strong>
+                                <span>Project Management</span>
+                            </li>
+                            <li>
+                                <strong>PLM</strong>
+                                <span>Product Lifecycle</span>
+                            </li>
+                            <li>
+                                <strong>MRP</strong>
+                                <span>Manufacturing Planning</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Approach -->
+                <section class="modir-approach" data-name="Modir Approach">
+                    <div class="container">
+                        <header class="modir-section-head">
+                            <p class="modir-eyebrow">How we work</p>
+                            <h2 class="modir-section-title">Simple process. Serious outcomes.</h2>
+                        </header>
+                        <ol class="modir-approach__steps">
+                            <li>
+                                <h3>Listen &amp; map</h3>
+                                <p>We learn your processes, constraints, and goals before recommending tools.</p>
+                            </li>
+                            <li>
+                                <h3>Design &amp; deliver</h3>
+                                <p>Architecture, configuration, and products aligned to how your teams work.</p>
+                            </li>
+                            <li>
+                                <h3>Adopt &amp; improve</h3>
+                                <p>Training, handover, and continuous improvement after go-live.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Closing CTA -->
+                <section class="modir-cta" data-name="Modir CTA">
+                    <div class="container modir-cta__inner">
+                        <h2 class="modir-cta__title">Ready to modernize how your enterprise runs?</h2>
+                        <p class="modir-cta__lead">
+                            Tell us where you are today — we will help you choose the right path.
+                        </p>
+                        <a href="/contactus" class="modir-btn modir-btn--primary">Talk to Modir.Digital</a>
+                    </div>
+                </section>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

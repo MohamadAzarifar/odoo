@@ -66,7 +66,7 @@ echo "==> Writing docker-compose.yml"
 cat > "$ODOO_HOME/docker-compose.yml" <<'YML'
 services:
   db:
-    image: postgres:16
+    image: pgvector/pgvector:pg16
     container_name: odoo-postgres
     environment:
       - POSTGRES_DB=postgres
@@ -128,6 +128,17 @@ WantedBy=multi-user.target
 UNIT
 systemctl daemon-reload
 systemctl enable odoo
+
+if [[ -f "$ODOO_HOME/scripts/resources.conf" && -f "$ODOO_HOME/scripts/odoo-resources.sh" ]]; then
+  echo "==> Resource limits (/etc/odoo/resources.conf)"
+  install -d -m 755 /etc/odoo
+  install -m 644 "$ODOO_HOME/scripts/resources.conf" /etc/odoo/resources.conf
+  install -m 755 "$ODOO_HOME/scripts/odoo-resources.sh" /usr/local/sbin/odoo-resources.sh
+  install -m 644 "$ODOO_HOME/scripts/odoo-resources.service" /etc/systemd/system/odoo-resources.service
+  systemctl daemon-reload
+  systemctl enable odoo-resources.service
+  systemctl start odoo-resources.service
+fi
 
 echo "==> deploy.sh"
 cat > "$ODOO_HOME/deploy.sh" <<'DEP'

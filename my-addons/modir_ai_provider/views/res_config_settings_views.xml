@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.modir.ai.provider</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="AI Provider" string="AI Provider" name="modir_ai_provider" groups="base.group_system">
+                    <block title="Custom AI Provider" name="modir_ai_provider_block">
+                        <setting string="OpenAI-compatible API"
+                            help="When configured, Enterprise AI uses this endpoint instead of Odoo IAP (ai.api.odoo.com).">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="modir_ai_base_url" class="col-lg-3 o_light_label"/>
+                                    <field name="modir_ai_base_url" placeholder="https://api.openai.com/v1"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="modir_ai_api_key" class="col-lg-3 o_light_label"/>
+                                    <field name="modir_ai_api_key" password="True" placeholder="sk-..."/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="modir_ai_chat_model" class="col-lg-3 o_light_label"/>
+                                    <field name="modir_ai_chat_model" placeholder="gpt-4o-mini"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="modir_ai_embedding_model" class="col-lg-3 o_light_label"/>
+                                    <field name="modir_ai_embedding_model" placeholder="text-embedding-3-small"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

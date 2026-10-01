@@ -82,9 +82,11 @@ export class ErrorDialog extends Component {
     }
 
     onClickClipboard() {
-        browser.navigator.clipboard.writeText(
-            `${this.props.name}\n\n${this.props.message}\n\n${this.contextDetails}\n\n${this.props.traceback}`
-        );
+        const text = `${this.props.name}\n\n${this.props.message}\n\n${this.contextDetails}\n\n${this.props.traceback}`;
+        const clipboard = browser.navigator.clipboard;
+        if (clipboard?.writeText) {
+            clipboard.writeText(text);
+        }
         this.showTooltip();
     }
 }
@@ -143,9 +145,11 @@ export class RPCErrorDialog extends ErrorDialog {
     }
 
     onClickClipboard() {
-        browser.navigator.clipboard.writeText(
-            `${this.props.name}\n\n${this.props.message}\n\n${this.contextDetails}\n\n${this.traceback}`
-        );
+        const text = `${this.props.name}\n\n${this.props.message}\n\n${this.contextDetails}\n\n${this.traceback}`;
+        const clipboard = browser.navigator.clipboard;
+        if (clipboard?.writeText) {
+            clipboard.writeText(text);
+        }
         this.showTooltip();
     }
 }

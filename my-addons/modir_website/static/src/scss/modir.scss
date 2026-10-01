@@ -1,0 +1,521 @@
+/* Modir.Digital — homepage
+ * Direction: ink navy + teal accent (enterprise, not purple / cream)
+ * Inspired by modern ERP consulting shots on Dribbble
+ * Fonts are loaded via views/layout.xml (do not @import here — breaks Odoo asset bundles).
+ */
+
+/* Keep Persian pages RTL even if the RTL asset bundle was built without rtlcss. */
+html[dir='rtl'] body,
+html[dir='rtl'] #wrapwrap,
+body .o_rtl {
+    direction: rtl #{"!important /*rtl:ignore*/"};
+}
+
+/* Site-wide font fallback aligned with Odoo theme (Manrope / Syne / Vazirmatn). */
+body {
+    --md-ink: #0b1220;
+    --md-ink-2: #121a2b;
+    --md-fog: #d7e0ef;
+    --md-muted: #8fa0b8;
+    --md-paper: #f4f7fb;
+    --md-line: rgba(255, 255, 255, 0.1);
+    --md-accent: #2ec4b6;
+    --md-display: 'Syne', 'Vazirmatn', system-ui, sans-serif;
+    --md-body: 'Manrope', 'Vazirmatn', system-ui, sans-serif;
+    font-family: var(--md-body);
+}
+
+html[dir='rtl'] body,
+html[lang^='fa'] body,
+body.o_rtl {
+    --md-display: 'Vazirmatn', 'Syne', system-ui, sans-serif;
+    --md-body: 'Vazirmatn', 'Manrope', system-ui, sans-serif;
+    font-family: var(--md-body);
+}
+
+.modir-home {
+    color: var(--md-ink);
+    font-family: var(--md-body);
+    overflow-x: clip;
+}
+
+html[dir='rtl'] .modir-home,
+html[lang^='fa'] .modir-home,
+.o_rtl .modir-home {
+    text-align: start;
+}
+
+/* ---------- Buttons ---------- */
+.modir-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.45rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    text-decoration: none !important;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.modir-btn:hover {
+    transform: translateY(-2px);
+}
+
+.modir-btn--primary {
+    background: var(--md-accent);
+    color: #04201c !important;
+    border: 1px solid transparent;
+}
+
+.modir-btn--primary:hover {
+    background: #5ad9cd;
+    color: #04201c !important;
+}
+
+.modir-btn--ghost {
+    background: transparent;
+    color: #fff !important;
+    border: 1px solid var(--md-line);
+}
+
+.modir-btn--ghost:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ---------- Section chrome ---------- */
+.modir-section-head {
+    max-width: 40rem;
+    margin-bottom: 3rem;
+}
+
+.modir-section-head--light {
+    color: #fff;
+}
+
+.modir-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--md-accent);
+}
+
+.modir-section-title {
+    margin: 0;
+    font-family: var(--md-display);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.modir-section-lead {
+    margin: 1rem 0 0;
+    color: var(--md-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 34rem;
+}
+
+.modir-section-head--light .modir-section-lead {
+    color: rgba(215, 224, 239, 0.72);
+}
+
+/* ---------- Hero ---------- */
+.modir-hero {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 0 4rem;
+    background: var(--md-ink);
+    color: #fff;
+    overflow: hidden;
+}
+
+.modir-hero__atmosphere {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.modir-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 20%, transparent 75%);
+}
+
+.modir-hero__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+}
+
+.modir-hero__glow--a {
+    width: 520px;
+    height: 520px;
+    max-width: 55vw;
+    max-height: 55vw;
+    top: -8%;
+    inset-inline-end: -6%;
+    background: radial-gradient(circle, rgba(46, 196, 182, 0.45), transparent 70%);
+    animation: modir-float 12s ease-in-out infinite;
+}
+
+.modir-hero__glow--b {
+    width: 420px;
+    height: 420px;
+    max-width: 45vw;
+    max-height: 45vw;
+    bottom: 5%;
+    inset-inline-start: -8%;
+    background: radial-gradient(circle, rgba(79, 124, 255, 0.28), transparent 70%);
+    animation: modir-float 16s ease-in-out infinite reverse;
+}
+
+.modir-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+}
+
+.modir-hero__brand {
+    margin: 0 0 1.25rem;
+    font-family: var(--md-display);
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1;
+}
+
+.modir-hero__brand::after {
+    content: '';
+    display: block;
+    width: 3.25rem;
+    height: 3px;
+    margin-top: 1rem;
+    border-radius: 2px;
+    background: var(--md-accent);
+    transform-origin: left center;
+    animation: modir-draw 1s ease 0.4s both;
+}
+
+.o_rtl .modir-hero__brand::after {
+    transform-origin: right center;
+}
+
+.modir-hero__title {
+    margin: 0 0 1.35rem;
+    font-family: var(--md-display);
+    font-weight: 700;
+    font-size: 2.35rem;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+}
+
+.modir-hero__lead {
+    margin: 0 0 2rem;
+    max-width: 36rem;
+    color: rgba(215, 224, 239, 0.78);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.modir-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.modir-hero__modules {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 4.5rem;
+    padding: 0 12px;
+    max-width: 1140px;
+    margin-inline: auto;
+    width: 100%;
+}
+
+.modir-hero__modules span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--md-line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--md-fog);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+/* Reveal states */
+[data-modir-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.modir-home.is-ready [data-modir-reveal] {
+    opacity: 1;
+    transform: none;
+}
+
+.modir-home.is-ready [data-modir-reveal='2'] { transition-delay: 0.08s; }
+.modir-home.is-ready [data-modir-reveal='3'] { transition-delay: 0.16s; }
+.modir-home.is-ready [data-modir-reveal='4'] { transition-delay: 0.24s; }
+.modir-home.is-ready [data-modir-reveal='5'] { transition-delay: 0.36s; }
+
+@keyframes modir-float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, 24px, 0); }
+}
+
+@keyframes modir-draw {
+    from { transform: scaleX(0); opacity: 0; }
+    to { transform: scaleX(1); opacity: 1; }
+}
+
+/* ---------- Offer ---------- */
+.modir-offer {
+    padding: 5.5rem 0;
+    background: var(--md-paper);
+}
+
+.modir-offer__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 3.5rem;
+}
+
+.modir-offer__item {
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(11, 18, 32, 0.12);
+}
+
+.modir-offer__index {
+    display: block;
+    margin-bottom: 1rem;
+    font-family: var(--md-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--md-accent);
+    letter-spacing: 0.08em;
+}
+
+.modir-offer__item h3 {
+    margin: 0 0 0.75rem;
+    font-family: var(--md-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.modir-offer__item p {
+    margin: 0;
+    color: #4d5d75;
+    line-height: 1.65;
+    font-size: 1.02rem;
+}
+
+/* ---------- Domains ---------- */
+.modir-domains {
+    padding: 5.5rem 0;
+    background: var(--md-ink-2);
+    color: #fff;
+}
+
+.modir-domains__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.modir-domains__list li {
+    background: var(--md-ink-2);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: background 0.25s ease;
+}
+
+.modir-domains__list li:hover {
+    background: #182338;
+}
+
+.modir-domains__list strong {
+    font-family: var(--md-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--md-accent);
+}
+
+.modir-domains__list span {
+    color: rgba(215, 224, 239, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ---------- Approach ---------- */
+.modir-approach {
+    padding: 5.5rem 0;
+    background: #fff;
+}
+
+.modir-approach__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    counter-reset: modir-step;
+}
+
+.modir-approach__steps li {
+    position: relative;
+    padding-top: 2.5rem;
+    counter-increment: modir-step;
+}
+
+.modir-approach__steps li::before {
+    content: counter(modir-step, decimal-leading-zero);
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    font-family: var(--md-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--md-accent);
+}
+
+.modir-approach__steps h3 {
+    margin: 0 0 0.65rem;
+    font-family: var(--md-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.modir-approach__steps p {
+    margin: 0;
+    color: #4d5d75;
+    line-height: 1.6;
+}
+
+/* ---------- CTA ---------- */
+.modir-cta {
+    padding: 5rem 0;
+    background:
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(46, 196, 182, 0.18), transparent 55%),
+        var(--md-ink);
+    color: #fff;
+}
+
+.modir-cta__inner {
+    max-width: 40rem;
+}
+
+.modir-cta__title {
+    margin: 0 0 1rem;
+    font-family: var(--md-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+.modir-cta__lead {
+    margin: 0 0 1.75rem;
+    color: rgba(215, 224, 239, 0.75);
+    font-size: 1.08rem;
+    line-height: 1.6;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 768px) {
+    .modir-hero__brand {
+        font-size: 2rem;
+    }
+
+    .modir-hero__title {
+        font-size: 3.4rem;
+    }
+
+    .modir-hero__lead {
+        font-size: 1.15rem;
+    }
+
+    .modir-section-title {
+        font-size: 2.2rem;
+    }
+
+    .modir-cta__title {
+        font-size: 2.3rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .modir-hero__title {
+        font-size: 4.2rem;
+    }
+
+    .modir-section-title {
+        font-size: 2.55rem;
+    }
+
+    .modir-cta__title {
+        font-size: 2.6rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .modir-hero {
+        min-height: auto;
+        padding: 4.5rem 0 3rem;
+    }
+
+    .modir-offer__row,
+    .modir-approach__steps {
+        grid-template-columns: 1fr;
+    }
+
+    .modir-hero__modules {
+        margin-top: 3rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .modir-btn {
+        width: 100%;
+    }
+
+    .modir-hero__actions {
+        flex-direction: column;
+    }
+}

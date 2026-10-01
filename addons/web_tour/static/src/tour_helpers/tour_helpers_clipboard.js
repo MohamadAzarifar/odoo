@@ -1,7 +1,10 @@
 import { patch } from "@web/core/utils/patch";
 import { TourHelpers } from "./tour_helpers";
 
-const originalClipboardWriteText = window.navigator.clipboard.writeText;
+// Clipboard API is only available in secure contexts (HTTPS / localhost).
+// Guarding avoids aborting the whole web_tour.interactive bundle on HTTP.
+const clipboard = window.navigator.clipboard;
+const originalClipboardWriteText = clipboard?.writeText?.bind(clipboard);
 
 patch(TourHelpers.prototype, {
     /**
@@ -16,7 +19,9 @@ patch(TourHelpers.prototype, {
      *  run: "allowClipboardWrite",
      */
     allowClipboardWrite() {
-        window.navigator.clipboard.writeText = () => Promise.resolve();
+        if (clipboard) {
+            clipboard.writeText = () => Promise.resolve();
+        }
     },
 
     /**
@@ -25,6 +30,8 @@ patch(TourHelpers.prototype, {
      *  run: "restoreClipboardWrite",
      */
     restoreClipboardWrite() {
-        window.navigator.clipboard.writeText = originalClipboardWriteText;
+        if (clipboard && originalClipboardWriteText) {
+            clipboard.writeText = originalClipboardWriteText;
+        }
     },
 });

@@ -1,0 +1,12 @@
+[Unit]
+Description=Apply Odoo live-server resource limits
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/odoo-resources.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

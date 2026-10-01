@@ -17,7 +17,7 @@ patch(DiscussClientAction.prototype, {
         useOnChange(
             () => [this.store.discuss.scopedAiAgentId],
             (scopedAiAgentId) => {
-                this.props.updateActionState?.({ scoped_ai_agent_id: scopedAiAgentId });
+                this.props?.updateActionState?.({ scoped_ai_agent_id: scopedAiAgentId });
                 if (this.action()) {
                     this.action().context.scoped_ai_agent_id = scopedAiAgentId;
                 }

@@ -58,7 +58,8 @@ export class DiscussApp extends Record {
             action.currentController.action.context.active_id = activeId;
             // Sync the action service's own state, or a later `action.restore()` (e.g.
             // a `soft_reload`) rebuilds the URL from a stale, frozen `active_id` instead.
-            action?.currentController.props.updateActionState?.(action?.currentController, {
+            // Props may be missing briefly while Discuss mounts (e.g. AI agent open).
+            action.currentController.props?.updateActionState?.(action.currentController, {
                 active_id: activeId,
             });
         }

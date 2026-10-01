@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Branding is applied in post_init_hook (website record xml ids vary). -->
+</odoo>
