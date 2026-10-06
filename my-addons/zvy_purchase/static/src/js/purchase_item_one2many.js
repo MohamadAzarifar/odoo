@@ -4,8 +4,9 @@ import { registry } from "@web/core/registry";
 import { X2ManyField, x2ManyField } from "@web/views/fields/x2many/x2many_field";
 
 export class OpenFormX2ManyField extends X2ManyField {
-    async openRecord(record) {
-        return this.switchToForm(record);
+    // Odoo 20 passes `{ newWindow }` into openRecord / switchToForm.
+    async openRecord(record, options = {}) {
+        return this.switchToForm(record, options);
     }
 
     async onAdd() {

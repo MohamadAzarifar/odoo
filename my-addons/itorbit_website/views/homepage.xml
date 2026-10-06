@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="homepage" inherit_id="website.homepage" name="IT Orbit Homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure ito-home">
+
+                <section class="ito-hero" data-name="IT Orbit Hero">
+                    <div class="ito-hero__wash" aria-hidden="true"/>
+                    <div class="container ito-hero__grid">
+                        <div class="ito-hero__copy">
+                            <p class="ito-hero__brand" data-ito-reveal="1">
+                                <span class="ito-hero__brand-fa">مدارگسترش</span>
+                                <span class="ito-hero__brand-sep" aria-hidden="true"/>
+                                <span class="ito-hero__brand-en">IT Orbit</span>
+                            </p>
+                            <h1 class="ito-hero__title" data-ito-reveal="2">Native software platforms for large organizations</h1>
+                            <p class="ito-hero__lead" data-ito-reveal="3">A knowledge-based company ranked first by the Supreme Council of Informatics — we unify software production, processes, business rules, security, and education.</p>
+                            <div class="ito-hero__actions" data-ito-reveal="4">
+                                <a href="/contactus" class="ito-btn ito-btn--primary">Contact us</a>
+                                <a href="#products" class="ito-btn ito-btn--secondary">View products</a>
+                            </div>
+                        </div>
+                        <div class="ito-hero__visual" data-ito-reveal="4" aria-hidden="true">
+                            <svg class="ito-hero__diagram" viewBox="0 0 420 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation" direction="ltr">
+                                <rect x="24" y="28" width="372" height="304" rx="12" stroke="currentColor" stroke-opacity="0.12"/>
+                                <rect x="48" y="56" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.04" stroke="#f05a28" stroke-opacity="0.45"/>
+                                <text x="118" y="94" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">Orbit@ll</text>
+                                <text x="118" y="116" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Production line</text>
+                                <rect x="232" y="56" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.03" stroke="#07111f" stroke-opacity="0.14"/>
+                                <text x="302" y="94" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">EPIC</text>
+                                <text x="302" y="116" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Process</text>
+                                <rect x="48" y="172" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.03" stroke="#07111f" stroke-opacity="0.14"/>
+                                <text x="118" y="210" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">ACE</text>
+                                <text x="118" y="232" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Rules</text>
+                                <rect x="232" y="172" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.03" stroke="#07111f" stroke-opacity="0.14"/>
+                                <text x="302" y="210" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">Citadel</text>
+                                <text x="302" y="232" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Security</text>
+                                <rect x="140" y="280" width="140" height="36" rx="8" fill="#f05a28" fill-opacity="0.1" stroke="#f05a28" stroke-opacity="0.5"/>
+                                <text x="210" y="303" text-anchor="middle" direction="ltr" fill="#f05a28" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="14" font-weight="700">NAD</text>
+                                <path d="M118 144v20M302 144v20M118 260v12h184v-12" stroke="#07111f" stroke-opacity="0.12" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ito-products" id="products" data-name="IT Orbit Products">
+                    <div class="container">
+                        <header class="ito-section-head" data-ito-reveal="s">
+                            <p class="ito-eyebrow">Products</p>
+                            <h2 class="ito-section-title">The IT Orbit platforms</h2>
+                            <p class="ito-section-lead">Five homegrown systems for software production, process management, business rules, access security, and education.</p>
+                        </header>
+                        <ol class="ito-products__rail">
+                            <li class="ito-products__row" data-ito-reveal="s">
+                                <span class="ito-products__index">01</span>
+                                <div class="ito-products__body">
+                                    <h3 class="ito-products__code">Orbit@ll</h3>
+                                    <p class="ito-products__subtitle">Software production platform</p>
+                                    <p class="ito-products__outcome">Cut the cost and time of building enterprise software.</p>
+                                </div>
+                            </li>
+                            <li class="ito-products__row" data-ito-reveal="s">
+                                <span class="ito-products__index">02</span>
+                                <div class="ito-products__body">
+                                    <h3 class="ito-products__code">EPIC</h3>
+                                    <p class="ito-products__subtitle">Business process management</p>
+                                    <p class="ito-products__outcome">Turn organizational processes into software you can run — without a heavy dependence on specialists.</p>
+                                </div>
+                            </li>
+                            <li class="ito-products__row" data-ito-reveal="s">
+                                <span class="ito-products__index">03</span>
+                                <div class="ito-products__body">
+                                    <h3 class="ito-products__code">ACE</h3>
+                                    <p class="ito-products__subtitle">Business rules management</p>
+                                    <p class="ito-products__outcome">Define your business rules and keep system behavior precise and controllable.</p>
+                                </div>
+                            </li>
+                            <li class="ito-products__row" data-ito-reveal="s">
+                                <span class="ito-products__index">04</span>
+                                <div class="ito-products__body">
+                                    <h3 class="ito-products__code">Citadel</h3>
+                                    <p class="ito-products__subtitle">Security and access control</p>
+                                    <p class="ito-products__outcome">RBAC and BLP for sensitive systems — security at the infrastructure layer.</p>
+                                </div>
+                            </li>
+                            <li class="ito-products__row" data-ito-reveal="s">
+                                <span class="ito-products__index">05</span>
+                                <div class="ito-products__body">
+                                    <h3 class="ito-products__code">NAD</h3>
+                                    <p class="ito-products__subtitle">Integrated university system</p>
+                                    <p class="ito-products__outcome">The education ERP, with more than 60 modules, for running and improving university services.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="ito-why" id="about" data-name="IT Orbit Why">
+                    <div class="container ito-why__grid">
+                        <header class="ito-section-head" data-ito-reveal="s">
+                            <p class="ito-eyebrow">Why IT Orbit</p>
+                            <h2 class="ito-section-title">Trust comes from clarity and a track record</h2>
+                        </header>
+                        <div class="ito-why__copy" data-ito-reveal="s">
+                            <p>A team of experienced specialists, using current tools and technology, delivers solutions for national projects. IT Orbit does not only apply knowledge — it produces knowledge and innovation.</p>
+                            <p>With a strong record on large-scale national projects, we have stayed among the pioneers of the country’s software industry and offer a wide range of knowledge-based products.</p>
+                            <ul class="ito-why__stats" aria-label="Highlights">
+                                <li><strong>+20</strong><span>Years of experience</span></li>
+                                <li><strong>Rank 1</strong><span>Supreme Council of Informatics</span></li>
+                                <li><strong>+60</strong><span>modules in NAD</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ito-cta" data-name="IT Orbit CTA">
+                    <div class="container ito-cta__inner" data-ito-reveal="s">
+                        <h2 class="ito-cta__title">Ready to talk about the next project?</h2>
+                        <p class="ito-cta__lead">
+                            Phone <a href="tel:+982188373555">021-88373555</a>
+                            ·
+                            <a href="mailto:Info@itorbit.net">Info@itorbit.net</a>
+                        </p>
+                        <a href="/contactus" class="ito-btn ito-btn--primary">Contact us</a>
+                    </div>
+                </section>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

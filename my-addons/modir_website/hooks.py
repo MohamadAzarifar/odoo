@@ -29,10 +29,10 @@ MENU_FA = {
 
 # Exact English → Persian replacements for homepage arch blobs
 HOMEPAGE_FA = {
-    'Enterprise systems,<br/>\n                            made clear.':
-        'سامانه‌های سازمانی،<br/>\n                            شفاف و یکپارچه.',
-    'Consultancy and products for ERP, knowledge, documents,\n                            customers, projects, products, and manufacturing —\n                            so your organization runs as one.':
-        'مشاوره و محصولات برای ERP، مدیریت دانش، اسناد،\n                            مشتریان، پروژه‌ها، محصول و تولید —\n                            تا سازمان شما یکپارچه کار کند.',
+    'Enterprise systems,<br/>\n                                made clear.':
+        'سامانه‌های سازمانی،<br/>\n                                شفاف و یکپارچه.',
+    'Consultancy and products for ERP, knowledge, documents,\n                                customers, projects, products, and manufacturing —\n                                so your organization runs as one.':
+        'مشاوره و محصولات برای ERP، مدیریت دانش، اسناد،\n                                مشتریان، پروژه‌ها، محصول و تولید —\n                                تا سازمان شما یکپارچه کار کند.',
     'Book a consultation': 'دریافت مشاوره',
     'Explore capabilities': 'مشاهده توانمندی‌ها',
     'What we do': 'آنچه انجام می‌دهیم',
@@ -74,6 +74,69 @@ HOMEPAGE_FA = {
     '<span class="modir-offer__index">02</span>': '<span class="modir-offer__index">۰۲</span>',
 }
 
+THANKS_FA = {
+    'Thank You!': 'سپاسگزاریم!',
+    'Your message has been sent.<br/>\n                            We will get back to you shortly.':
+        'پیام شما ارسال شد.<br/>\n                            به‌زودی با شما تماس می‌گیریم.',
+    'Go to Homepage': 'برو به صفحه اصلی',
+}
+
+CONTACT_FA = {
+    'Contact us': 'تماس با ما',
+    'Tell us about your organization, processes, and goals —\n                            we will help you choose the right path for ERP and related systems.':
+        'درباره سازمان، فرآیندها و اهداف خود بگویید —\n                            مسیر درست برای ERP و سامانه‌های مرتبط را با هم انتخاب می‌کنیم.',
+    'Message': 'پیام',
+    'Send a message': 'ارسال پیام',
+    'Name': 'نام',
+    'Phone Number': 'شماره تماس',
+    'Email': 'ایمیل',
+    'Company': 'شرکت',
+    'Subject': 'موضوع',
+    'Your name': 'نام شما',
+    'Organization name': 'نام سازمان',
+    'What do you need help with?': 'در چه زمینه‌ای نیاز به کمک دارید؟',
+    'Share context, constraints, and goals.': 'زمینه، محدودیت‌ها و اهداف را بنویسید.',
+    'We typically respond within 1–2 business days.': 'معمولاً ظرف ۱ تا ۲ روز کاری پاسخ می‌دهیم.',
+    'Send Message': 'ارسال پیام',
+    'Direct': 'ارتباط مستقیم',
+    'Reach us directly': 'مستقیم با ما در تماس باشید',
+    'Phone': 'تلفن',
+    'Focus': 'تمرکز',
+    'ERP, KM, DMS, CRM, PM, PLM, and MRP — consultancy and products.':
+        'ERP، KM، DMS، CRM، PM، PLM و MRP — مشاوره و محصولات.',
+    'FAQ': 'پرسش‌های متداول',
+    'Common questions': 'سوالات رایج',
+    'How do engagements start?': 'همکاری چگونه شروع می‌شود؟',
+    'We begin with discovery: your processes, constraints, and goals — then recommend a clear path.':
+        'با شناخت فرآیندها، محدودیت‌ها و اهداف شما شروع می‌کنیم — سپس مسیر روشن پیشنهاد می‌دهیم.',
+    'Do you implement and advise?': 'هم مشاوره می‌دهید و هم پیاده‌سازی؟',
+    'Yes. Consultancy covers design and oversight; products extend planning, operations, and manufacturing control.':
+        'بله. مشاوره شامل طراحی و نظارت است؛ محصولات برنامه‌ریزی، عملیات و کنترل تولید را پوشش می‌دهند.',
+    'Which systems do you cover?': 'کدام سامانه‌ها را پوشش می‌دهید؟',
+    'ERP, knowledge, documents, CRM, projects, product lifecycle, and manufacturing planning.':
+        'ERP، دانش، اسناد، CRM، پروژه، چرخه عمر محصول و برنامه‌ریزی تولید.',
+}
+
+THANKS_ARCH = """
+<div id="wrap" class="oe_structure modir-thanks">
+    <section class="modir-thanks__hero" data-name="Thank You">
+        <div class="modir-thanks__atmosphere" aria-hidden="true">
+            <div class="modir-thanks__grid"/>
+            <div class="modir-thanks__glow"/>
+        </div>
+        <div class="container modir-thanks__inner">
+            <div class="modir-thanks__mark" aria-hidden="true">✓</div>
+            <h1 class="modir-thanks__title">Thank You!</h1>
+            <p class="modir-thanks__lead">
+                Your message has been sent.<br/>
+                We will get back to you shortly.
+            </p>
+            <a href="/" class="modir-btn modir-btn--primary">Go to Homepage</a>
+        </div>
+    </section>
+</div>
+"""
+
 
 def _activate_persian(env):
     fa = env.ref('base.lang_fa_IR', raise_if_not_found=False)
@@ -95,13 +158,57 @@ def _reload_modir_translations(env):
 
 
 def _drop_homepage_cow(env):
-    """Remove website-specific copies of our inherit so module translations apply."""
+    """Remove website-specific copies so module translations/structure apply."""
     cows = env['ir.ui.view'].sudo().search([
-        ('key', '=', 'modir_website.homepage'),
+        ('key', 'in', [
+            'modir_website.homepage',
+            'modir_website.contactus',
+            'website.contactus',
+        ]),
         ('website_id', '!=', False),
     ])
     if cows:
         cows.unlink()
+
+
+def _apply_thanks_page(env):
+    """Replace contact thank-you page arch (website.page cannot be inherited via xmlid reliably)."""
+    page = env.ref('website.contactus_thanks', raise_if_not_found=False)
+    if not page or not page.view_id:
+        return
+    view = page.view_id.sudo()
+    # Keep outer t-call structure from website page
+    arch = view.arch_db
+    if isinstance(arch, dict):
+        en = arch.get('en_US') or next(iter(arch.values()), '')
+    else:
+        en = arch or ''
+    if 'modir-thanks' in en and 'modir-thanks__title' in en:
+        # Still refresh FA
+        _translate_views_by_key(env, view.key or 'website.contactus_thanks', THANKS_FA)
+        return
+    import re
+    new_en = re.sub(
+        r'<div id="wrap"[^>]*>.*?</div>\s*(?=<input|<t\s|$)',
+        THANKS_ARCH.strip() + '\n                    ',
+        en,
+        count=1,
+        flags=re.DOTALL,
+    )
+    if new_en == en:
+        # Fallback: wrap entire content after layout call
+        if '<div id="wrap"' in en:
+            new_en = re.sub(
+                r'<div id="wrap"[^>]*>[\s\S]*?</div>',
+                THANKS_ARCH.strip(),
+                en,
+                count=1,
+            )
+    if new_en != en:
+        view.write({'arch_db': new_en})
+    # Translate the page view (key is usually website.contactus_thanks)
+    key = view.key or 'website.contactus_thanks'
+    _translate_views_by_key(env, key, THANKS_FA)
 
 
 def _apply_replacements(text, mapping):
@@ -174,7 +281,7 @@ MODIR_FONTS = {
     'headings-font': "'Syne'",
     'navbar-font': "'Manrope'",
     'buttons-font': "'Manrope'",
-    'google-fonts': "('Manrope', 'Syne', 'Vazirmatn')",
+    'google-fonts': "('Manrope', 'Syne', 'Vazirmatn', 'Markazi Text')",
 }
 MODIR_PALETTE = {
     'o-color-1': '#2ec4b6',
@@ -239,6 +346,8 @@ def setup_website(env):
     _drop_homepage_cow(env)
     _reload_modir_translations(env)
     _translate_views_by_key(env, 'modir_website.homepage', HOMEPAGE_FA)
+    _translate_views_by_key(env, 'modir_website.contactus', CONTACT_FA)
+    _apply_thanks_page(env)
     _translate_views_by_key(env, 'website.footer_custom', FOOTER_FA)
     _translate_menus(env)
 

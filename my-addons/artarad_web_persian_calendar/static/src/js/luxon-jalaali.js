@@ -226,23 +226,38 @@ luxon.Duration.normalizeUnit = function (unit) {
 
 const originalFromObject = luxon.DateTime.fromObject;
 luxon.DateTime.fromObject = function (...args) {
-	args[0] = luxon.Duration.fromDurationLike(args[0]).values;
+	const raw = args[0] || {};
+	// Support both DateTime-style singular keys (jyear) and duration-style plurals (jyears).
+	const jYear = raw.jyears ?? raw.jyear;
+	const jMonth = raw.jmonths ?? raw.jmonth;
+	const jDay = raw.jdays ?? raw.jday;
+	const hasJalaali = jYear != null || jMonth != null || jDay != null;
 
-	if (args[0].hasOwnProperty("jyears") || args[0].hasOwnProperty("jmonths") || args[0].hasOwnProperty("jdays")) {
-		var j_year = args[0].jyears ? args[0].jyears : 0;
-		var j_month = args[0].jmonths ? args[0].jmonths : 1;
-		var j_day = args[0].jdays ? args[0].jdays : 1;
-
-		var gregorian_parts = JalaaliGregorianConverter.toGregorian(j_year, j_month, j_day);
-
-		args[0].years = gregorian_parts.gy;
-		args[0].months = gregorian_parts.gm;
-		args[0].days = gregorian_parts.gd;
-
-		delete args[0].jyears;
-		delete args[0].jmonths;
-		delete args[0].jdays;
+	if (!hasJalaali) {
+		// Do not run Duration.fromDurationLike on normal DateTime configs
+		// ({ year, month, day, ... }) — that produces NaN and breaks website forms.
+		return originalFromObject.call(this, ...args);
 	}
+
+	const j_year = Number(jYear) || 0;
+	const j_month = Number(jMonth) || 1;
+	const j_day = Number(jDay) || 1;
+	if (!Number.isFinite(j_year) || !Number.isFinite(j_month) || !Number.isFinite(j_day)) {
+		return luxon.DateTime.invalid("unparsable", "Invalid Jalaali date parts");
+	}
+
+	const gregorian_parts = JalaaliGregorianConverter.toGregorian(j_year, j_month, j_day);
+	const next = { ...raw };
+	next.year = gregorian_parts.gy;
+	next.month = gregorian_parts.gm;
+	next.day = gregorian_parts.gd;
+	delete next.jyears;
+	delete next.jmonths;
+	delete next.jdays;
+	delete next.jyear;
+	delete next.jmonth;
+	delete next.jday;
+	args[0] = next;
 	return originalFromObject.call(this, ...args);
 };
 
@@ -317,23 +332,27 @@ luxon.DateTime.fromFormat = function (text, fmt, opts = {}) {
 			second: fmt_parts.second.index != -1 ? parseInt(text.substring(fmt_parts.second.index, fmt_parts.second.index + fmt_parts.second.token.length), 10) : 0
 		};
 
+		if ([text_parts.year, text_parts.month, text_parts.day].some((n) => Number.isNaN(n))) {
+			return luxon.DateTime.invalid("unparsable", `invalid Jalaali input: ${text}`);
+		}
+
 		if (text_parts.year < 1500) {
 			return this.fromObject({
 				jyear: text_parts.year,
 				jmonth: text_parts.month,
 				jday: text_parts.day,
-				hour: text_parts.hour,
-				minute: text_parts.minute,
-				second: text_parts.second
+				hour: text_parts.hour || 0,
+				minute: text_parts.minute || 0,
+				second: text_parts.second || 0
 			});
 		} else {
 			return this.fromObject({
 				year: text_parts.year,
 				month: text_parts.month,
 				day: text_parts.day,
-				hour: text_parts.hour,
-				minute: text_parts.minute,
-				second: text_parts.second
+				hour: text_parts.hour || 0,
+				minute: text_parts.minute || 0,
+				second: text_parts.second || 0
 			});
 		}
 

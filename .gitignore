@@ -42,6 +42,9 @@ package-lock.json
 package.json
 .husky
 
+# local notes (private; not for the repository)
+docs/Draft.md
+
 # various virtualenv
 /bin/
 /build/

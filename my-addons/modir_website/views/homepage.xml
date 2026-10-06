@@ -12,33 +12,35 @@
                         <div class="modir-hero__glow modir-hero__glow--b"/>
                     </div>
                     <div class="container modir-hero__inner">
-                        <p class="modir-hero__brand" data-modir-reveal="1">Modir.Digital</p>
-                        <h1 class="modir-hero__title" data-modir-reveal="2">
-                            Enterprise systems,<br/>
-                            made clear.
-                        </h1>
-                        <p class="modir-hero__lead" data-modir-reveal="3">
-                            Consultancy and products for ERP, knowledge, documents,
-                            customers, projects, products, and manufacturing —
-                            so your organization runs as one.
-                        </p>
-                        <div class="modir-hero__actions" data-modir-reveal="4">
-                            <a href="/contactus" class="modir-btn modir-btn--primary">
-                                Book a consultation
-                            </a>
-                            <a href="#capabilities" class="modir-btn modir-btn--ghost">
-                                Explore capabilities
-                            </a>
+                        <div class="modir-hero__copy">
+                            <p class="modir-hero__brand" data-modir-reveal="1">Modir.Digital</p>
+                            <h1 class="modir-hero__title" data-modir-reveal="2">
+                                Enterprise systems,<br/>
+                                made clear.
+                            </h1>
+                            <p class="modir-hero__lead" data-modir-reveal="3">
+                                Consultancy and products for ERP, knowledge, documents,
+                                customers, projects, products, and manufacturing —
+                                so your organization runs as one.
+                            </p>
+                            <div class="modir-hero__actions" data-modir-reveal="4">
+                                <a href="/contactus" class="modir-btn modir-btn--primary">
+                                    Book a consultation
+                                </a>
+                                <a href="#capabilities" class="modir-btn modir-btn--ghost">
+                                    Explore capabilities
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modir-hero__modules" data-modir-reveal="5" aria-label="Modules">
-                        <span>ERP</span>
-                        <span>KM</span>
-                        <span>DMS</span>
-                        <span>CRM</span>
-                        <span>PM</span>
-                        <span>PLM</span>
-                        <span>MRP</span>
+                        <div class="modir-hero__modules" data-modir-reveal="5" aria-label="Modules">
+                            <span>ERP</span>
+                            <span>KM</span>
+                            <span>DMS</span>
+                            <span>CRM</span>
+                            <span>PM</span>
+                            <span>PLM</span>
+                            <span>MRP</span>
+                        </div>
                     </div>
                 </section>
 

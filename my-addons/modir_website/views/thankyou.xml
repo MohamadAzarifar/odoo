@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="contactus_thanks" inherit_id="website.contactus_thanks" name="Modir.Digital Thank You">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure modir-thanks">
+                <section class="modir-thanks__hero" data-name="Thank You">
+                    <div class="modir-thanks__atmosphere" aria-hidden="true">
+                        <div class="modir-thanks__grid"/>
+                        <div class="modir-thanks__glow"/>
+                    </div>
+                    <div class="container modir-thanks__inner">
+                        <div class="modir-thanks__mark" aria-hidden="true">🤝</div>
+                        <h1 class="modir-thanks__title">Thank You!</h1>
+                        <p class="modir-thanks__lead">
+                            Your message has been sent.<br/>
+                            We will get back to you shortly.
+                        </p>
+                        <a href="/" class="modir-btn modir-btn--primary">Go to Homepage</a>
+                    </div>
+                </section>
+            </div>
+        </xpath>
+    </template>
+</odoo>

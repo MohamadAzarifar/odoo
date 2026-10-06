@@ -21,6 +21,7 @@ body {
     --md-line: rgba(255, 255, 255, 0.1);
     --md-accent: #2ec4b6;
     --md-display: 'Syne', 'Vazirmatn', system-ui, sans-serif;
+    --md-markazi: 'Markazi Text', 'Vazirmatn', Georgia, serif;
     --md-body: 'Manrope', 'Vazirmatn', system-ui, sans-serif;
     font-family: var(--md-body);
 }
@@ -29,6 +30,7 @@ html[dir='rtl'] body,
 html[lang^='fa'] body,
 body.o_rtl {
     --md-display: 'Vazirmatn', 'Syne', system-ui, sans-serif;
+    --md-markazi: 'Markazi Text', 'Vazirmatn', Georgia, serif;
     --md-body: 'Vazirmatn', 'Manrope', system-ui, sans-serif;
     font-family: var(--md-body);
 }
@@ -187,7 +189,11 @@ html[lang^='fa'] .modir-home,
 .modir-hero__inner {
     position: relative;
     z-index: 1;
-    max-width: 920px;
+    width: 100%;
+}
+
+.modir-hero__copy {
+    max-width: 40rem;
 }
 
 .modir-hero__brand {
@@ -206,14 +212,11 @@ html[lang^='fa'] .modir-home,
     width: 3.25rem;
     height: 3px;
     margin-top: 1rem;
+    margin-inline-start: 0;
     border-radius: 2px;
     background: var(--md-accent);
-    transform-origin: left center;
+    transform-origin: inline-start center;
     animation: modir-draw 1s ease 0.4s both;
-}
-
-.o_rtl .modir-hero__brand::after {
-    transform-origin: right center;
 }
 
 .modir-hero__title {
@@ -237,18 +240,14 @@ html[lang^='fa'] .modir-home,
     display: flex;
     flex-wrap: wrap;
     gap: 0.85rem;
+    align-items: center;
 }
 
 .modir-hero__modules {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     gap: 0.55rem;
-    margin-top: 4.5rem;
-    padding: 0 12px;
-    max-width: 1140px;
-    margin-inline: auto;
+    margin-top: 3.5rem;
     width: 100%;
 }
 
@@ -457,17 +456,313 @@ html[lang^='fa'] .modir-home,
     line-height: 1.6;
 }
 
+/* ---------- Contact ---------- */
+.modir-contact {
+    color: var(--md-ink);
+    font-family: var(--md-body);
+    overflow-x: clip;
+}
+
+.modir-contact__hero {
+    position: relative;
+    padding: 5rem 0 3.5rem;
+    background: var(--md-ink);
+    color: #fff;
+    overflow: hidden;
+}
+
+.modir-contact__atmosphere {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.modir-contact__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+}
+
+.modir-contact__glow {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    max-width: 55vw;
+    max-height: 55vw;
+    top: -12%;
+    inset-inline-end: -8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46, 196, 182, 0.4), transparent 70%);
+    filter: blur(60px);
+    animation: modir-float 12s ease-in-out infinite;
+}
+
+.modir-contact__hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 40rem;
+}
+
+.modir-contact__title {
+    margin: 0 0 1.1rem;
+    font-family: var(--md-display);
+    font-weight: 700;
+    font-size: 2.35rem;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+}
+
+.modir-contact__lead {
+    margin: 0;
+    max-width: 36rem;
+    color: rgba(215, 224, 239, 0.78);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.modir-contact__body {
+    padding: 4.5rem 0 3.5rem;
+    background: var(--md-paper);
+}
+
+.modir-contact__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.85fr);
+    gap: 3rem 4rem;
+    align-items: start;
+}
+
+.modir-contact__form-panel .modir-section-head,
+.modir-contact__aside .modir-section-head {
+    margin-bottom: 1.75rem;
+}
+
+.modir-contact__form .s_website_form_label {
+    display: block;
+    width: auto !important;
+    margin-bottom: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--md-ink);
+}
+
+.modir-contact__form .s_website_form_mark {
+    color: var(--md-accent);
+}
+
+.modir-contact__form .form-control,
+.modir-contact__form .s_website_form_input {
+    border: 1px solid rgba(11, 18, 32, 0.14);
+    border-radius: 0.75rem;
+    background: #fff;
+    color: var(--md-ink);
+    padding: 0.75rem 0.95rem;
+    min-height: 2.85rem;
+    box-shadow: none;
+}
+
+.modir-contact__form textarea.form-control {
+    min-height: 9rem;
+}
+
+.modir-contact__form .form-control:focus {
+    border-color: var(--md-accent);
+    box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.2);
+}
+
+.modir-contact__form .s_website_form_field_description {
+    margin-top: 0.45rem;
+    color: #4d5d75;
+}
+
+.modir-contact__form .s_website_form_submit {
+    text-align: start;
+    padding-top: 0.5rem;
+}
+
+.modir-contact__channels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.modir-contact__channels li {
+    padding: 1.15rem 1.25rem;
+    border: 1px solid rgba(11, 18, 32, 0.1);
+    border-radius: 1rem;
+    background: #fff;
+}
+
+.modir-contact__channel-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--md-accent);
+}
+
+.modir-contact__channels a {
+    color: var(--md-ink);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.modir-contact__channels a:hover {
+    color: #1a9e93;
+}
+
+.modir-contact__channels p {
+    margin: 0;
+    color: #4d5d75;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.modir-contact__faq {
+    padding: 4rem 0 5rem;
+    background: #fff;
+    border-top: 1px solid rgba(11, 18, 32, 0.06);
+}
+
+.modir-contact__faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem 2.25rem;
+}
+
+.modir-contact__faq-grid h3 {
+    margin: 0 0 0.65rem;
+    font-family: var(--md-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.modir-contact__faq-grid p {
+    margin: 0;
+    color: #4d5d75;
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.modir-contact.is-ready [data-modir-reveal],
+.modir-thanks.is-ready [data-modir-reveal] {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- Thank you ---------- */
+.modir-thanks {
+    color: #fff;
+    font-family: var(--md-body);
+    overflow-x: clip;
+}
+
+.modir-thanks__hero {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0 4.5rem;
+    background: var(--md-ink);
+    overflow: hidden;
+    text-align: center;
+}
+
+.modir-thanks__atmosphere {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.modir-thanks__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, #000 15%, transparent 75%);
+}
+
+.modir-thanks__glow {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    max-width: 70vw;
+    max-height: 70vw;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46, 196, 182, 0.32), transparent 70%);
+    filter: blur(50px);
+    animation: modir-float 14s ease-in-out infinite;
+}
+
+.modir-thanks__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 36rem;
+}
+
+.modir-thanks__mark {
+    display: block;
+    margin: 0 auto 1.25rem;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.modir-thanks__title {
+    margin: 0 0 1rem;
+    font-family: var(--md-markazi);
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.modir-thanks__lead {
+    margin: 0 0 2rem;
+    color: rgba(215, 224, 239, 0.78);
+    font-size: 1.08rem;
+    line-height: 1.65;
+}
+
+/* Footer section titles — Markazi */
+#footer h5,
+.o_footer h5,
+#footer .h5-fs,
+.o_footer .h5-fs {
+    font-family: var(--md-markazi);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
 /* ---------- Responsive ---------- */
 @media (min-width: 768px) {
     .modir-hero__brand {
         font-size: 2rem;
     }
 
-    .modir-hero__title {
+    .modir-hero__title,
+    .modir-contact__title {
         font-size: 3.4rem;
     }
 
-    .modir-hero__lead {
+    .modir-hero__lead,
+    .modir-contact__lead {
         font-size: 1.15rem;
     }
 
@@ -478,10 +773,19 @@ html[lang^='fa'] .modir-home,
     .modir-cta__title {
         font-size: 2.3rem;
     }
+
+    .modir-thanks__title {
+        font-size: 3.4rem;
+    }
+
+    .modir-thanks__lead {
+        font-size: 1.15rem;
+    }
 }
 
 @media (min-width: 1200px) {
-    .modir-hero__title {
+    .modir-hero__title,
+    .modir-contact__title {
         font-size: 4.2rem;
     }
 
@@ -492,6 +796,10 @@ html[lang^='fa'] .modir-home,
     .modir-cta__title {
         font-size: 2.6rem;
     }
+
+    .modir-thanks__title {
+        font-size: 4rem;
+    }
 }
 
 @media (max-width: 991.98px) {
@@ -501,12 +809,18 @@ html[lang^='fa'] .modir-home,
     }
 
     .modir-offer__row,
-    .modir-approach__steps {
+    .modir-approach__steps,
+    .modir-contact__layout,
+    .modir-contact__faq-grid {
         grid-template-columns: 1fr;
     }
 
     .modir-hero__modules {
         margin-top: 3rem;
+    }
+
+    .modir-contact__hero {
+        padding: 4rem 0 3rem;
     }
 }
 
@@ -515,7 +829,13 @@ html[lang^='fa'] .modir-home,
         width: 100%;
     }
 
-    .modir-hero__actions {
+    .modir-hero__actions,
+    .modir-contact__form .s_website_form_submit {
         flex-direction: column;
+    }
+
+    .modir-contact__form .s_website_form_submit .modir-btn {
+        width: 100%;
+        justify-content: center;
     }
 }

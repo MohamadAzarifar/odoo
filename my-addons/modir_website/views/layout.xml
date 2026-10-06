@@ -5,7 +5,7 @@
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
             <link rel="stylesheet"
-                  href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Syne:wght@600;700;800&amp;family=Vazirmatn:wght@400;500;600;700&amp;display=swap"/>
+                  href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Markazi+Text:wght@400;500;600;700&amp;family=Syne:wght@600;700;800&amp;family=Vazirmatn:wght@400;500;600;700&amp;display=swap"/>
         </xpath>
     </template>
 </odoo>

@@ -3,11 +3,11 @@
 import { whenReady } from "@odoo/owl";
 
 whenReady(() => {
-    const home = document.querySelector(".modir-home");
-    if (!home) {
+    const roots = document.querySelectorAll(".modir-home, .modir-contact, .modir-thanks");
+    if (!roots.length) {
         return;
     }
     requestAnimationFrame(() => {
-        home.classList.add("is-ready");
+        roots.forEach((el) => el.classList.add("is-ready"));
     });
 });

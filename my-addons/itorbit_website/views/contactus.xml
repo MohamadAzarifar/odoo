@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="contactus" inherit_id="website.contactus" name="IT Orbit Contact Us">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure ito-contact">
+
+                <section class="ito-contact__hero" data-name="Contact Hero">
+                    <div class="container ito-contact__hero-inner">
+                        <p class="ito-hero__brand" data-ito-reveal="1">
+                            <span class="ito-hero__brand-fa">مدارگسترش</span>
+                            <span class="ito-hero__brand-sep" aria-hidden="true"/>
+                            <span class="ito-hero__brand-en">IT Orbit</span>
+                        </p>
+                        <h1 class="ito-contact__title" data-ito-reveal="2">Contact us</h1>
+                        <p class="ito-contact__lead" data-ito-reveal="3">Tell us about a software project, an enterprise platform, or working with IT Orbit.</p>
+                    </div>
+                </section>
+
+                <section class="ito-contact__body" data-name="Contact Form">
+                    <div class="container">
+                        <div class="ito-contact__layout">
+                            <div class="ito-contact__form-panel" data-ito-reveal="4">
+                                <header class="ito-section-head">
+                                    <p class="ito-eyebrow">Message</p>
+                                    <h2 class="ito-section-title">Send a message</h2>
+                                </header>
+                                <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                                    <form id="contactus_form" action="/website/form/" method="post" enctype="multipart/form-data" class="o_mark_required ito-contact__form" data-mark="*" data-model_name="mail.mail" data-success-mode="redirect" data-success-page="/contactus-thank-you" data-pre-fill="true">
+                                        <div class="s_website_form_rows row s_col_no_bgcolor">
+                                            <div class="mb-3 col-lg-6 s_website_form_field s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                                <label class="s_website_form_label" for="ito_c1">
+                                                    <span class="s_website_form_label_content">Name</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <input id="ito_c1" type="text" placeholder="Your name" class="form-control s_website_form_input" name="name" required="" data-fill-with="name"/>
+                                            </div>
+                                            <div class="mb-3 col-lg-6 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                                <label class="s_website_form_label" for="ito_c2">
+                                                    <span class="s_website_form_label_content">Phone</span>
+                                                </label>
+                                                <input id="ito_c2" type="tel" placeholder="021 …" class="form-control s_website_form_input" name="phone" data-fill-with="phone"/>
+                                            </div>
+                                            <div class="mb-3 col-lg-6 s_website_form_field s_website_form_required s_website_form_model_required" data-type="email" data-name="Field">
+                                                <label class="s_website_form_label" for="ito_c3">
+                                                    <span class="s_website_form_label_content">Email</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <input id="ito_c3" type="email" placeholder="you@org.ir" class="form-control s_website_form_input" name="email_from" required="" data-fill-with="email"/>
+                                            </div>
+                                            <div class="mb-3 col-lg-6 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                                <label class="s_website_form_label" for="ito_c4">
+                                                    <span class="s_website_form_label_content">Organization</span>
+                                                </label>
+                                                <input id="ito_c4" type="text" placeholder="Organization name" class="form-control s_website_form_input" name="company" data-fill-with="parent_name"/>
+                                            </div>
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <label class="s_website_form_label" for="ito_c5">
+                                                    <span class="s_website_form_label_content">Subject</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <input id="ito_c5" type="text" placeholder="Message subject" class="form-control s_website_form_input" name="subject" required=""/>
+                                            </div>
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_custom s_website_form_required" data-type="text" data-name="Field">
+                                                <label class="s_website_form_label" for="ito_c6">
+                                                    <span class="s_website_form_label_content">Message</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <textarea id="ito_c6" placeholder="Describe the need or the project" class="form-control s_website_form_input" name="description" required="" rows="6"/>
+                                            </div>
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_dnone">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" for="ito_c7">
+                                                        <span class="s_website_form_label_content">Email To</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="ito_c7" type="hidden" class="form-control s_website_form_input" name="email_to" value="Info@itorbit.net"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 col-12 s_website_form_submit s_website_form_no_submit_label" data-name="Submit Button">
+                                                <span id="s_website_form_result"/>
+                                                <a href="#" role="button" class="ito-btn ito-btn--primary s_website_form_send">Send message</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+                            </div>
+
+                            <aside class="ito-contact__aside" data-ito-reveal="5">
+                                <header class="ito-section-head">
+                                    <p class="ito-eyebrow">Direct contact</p>
+                                    <h2 class="ito-section-title">Offices and contact</h2>
+                                </header>
+                                <ul class="ito-contact__channels">
+                                    <li>
+                                        <span class="ito-contact__channel-label">Phone</span>
+                                        <a href="tel:+982188373555">021-88373555</a>
+                                    </li>
+                                    <li>
+                                        <span class="ito-contact__channel-label">Email</span>
+                                        <a href="mailto:Info@itorbit.net">Info@itorbit.net</a>
+                                    </li>
+                                    <li>
+                                        <span class="ito-contact__channel-label">Head office (Tavanir)</span>
+                                        <p>North Tavanir, above Hemmat Bridge, Human Alley, No. 6, 4th floor</p>
+                                    </li>
+                                    <li>
+                                        <span class="ito-contact__channel-label">Building 2 (Valiasr)</span>
+                                        <p>Valiasr intersection, Bozorgmehr Street, Fariman Street, Boojari Sefat Alley, No. 2, Unit 9</p>
+                                    </li>
+                                </ul>
+                            </aside>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

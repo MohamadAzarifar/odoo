@@ -101,6 +101,6 @@ sudo systemctl start odoo-resources.service   # re-apply /etc/odoo/resources.con
 - Public HTTP is **port 80** via Nginx. Odoo listens on **8069**. `odoo.conf` has `proxy_mode = True`.
 - Nginx site: `/etc/nginx/sites-available/odoo`. `/` → `127.0.0.1:8069`. With `workers > 0`, `/websocket` and `/longpolling` → gevent on **8072** (`odoo-resources` keeps that in sync).
 - Outbound from the `odoo` user is denied except destinations listed in `/etc/odoo/outbound-allow.conf`. Apply with `systemctl restart odoo-egress.service` (timer refreshes DNS every 30 minutes).
-- Enterprise AI uses **`modir_ai_provider`** (OpenAI-compatible URL / model / API key in **Settings → AI Provider**). It never calls `ai.api.odoo.com`. Provider host currently allowed: `ai.liara.ir` (see `/etc/odoo/outbound-allow.conf`).
+- Enterprise AI uses **`modir_ai_provider`** (OpenAI-compatible URL / model / API key in **Settings → AI Provider**). It never calls `ai.api.odoo.com`. Provider host currently allowed: `ai.liara.ir` (see `/etc/odoo/outbound-allow.conf`). Full runbook: [AI-CONFIGURATION.md](AI-CONFIGURATION.md).
 - Do **not** use the old IAP SOCKS tunnel (`scripts/ai-iap-tunnel.sh` / `odoo.service.d/proxy.conf`) for AI.
 - Resource caps live in `/etc/odoo/resources.conf` (defaults sized for **2 vCPU / ~4 GiB**: Odoo `MemoryMax=2G` + `workers=2`, Postgres `mem_limit=1g`, Nginx `MemoryMax=128M`). Edit that file, then `systemctl start odoo-resources.service`.

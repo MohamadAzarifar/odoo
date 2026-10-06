@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Modir.Digital Website',
-    'version': '1.1.5',
+    'version': '1.1.8',
     'category': 'Website',
     'summary': 'Homepage for Modir.Digital — enterprise management consultancy & products',
     'description': """
@@ -15,6 +15,7 @@ Covers ERP, KM, DMS, CRM, PM, PLM, MRP consultancy and products.
     'data': [
         'views/layout.xml',
         'views/homepage.xml',
+        'views/contactus.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
