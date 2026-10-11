@@ -1312,6 +1312,31 @@ class ZvyPurchaseItem(models.Model):
                 _("Selecting an offer is not available for Tendering purchase type.")
             )
 
+    def action_add_offer(self):
+        self.ensure_one()
+        if self.state != "in_review":
+            raise UserError(
+                _(
+                    "Offers can only be added from the header when the "
+                    "purchase item is In Review."
+                )
+            )
+        if not self.can_add_offers:
+            raise AccessError(
+                _(
+                    "Only Commercial Experts and Commercial Managers can add "
+                    "offers."
+                )
+            )
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Offer"),
+            "res_model": "zvy.purchase.offer",
+            "views": [[False, "form"]],
+            "target": "current",
+            "context": {"default_item_id": self.id},
+        }
+
     def action_submit_offers(self):
         """Submit the CE's own Draft/Rejected offers on this item to In Review."""
         self.ensure_one()
@@ -1707,6 +1732,9 @@ class ZvyPurchaseOffer(models.Model):
     can_edit = fields.Boolean(
         compute="_compute_can_edit",
     )
+    can_add_offers = fields.Boolean(
+        related="item_id.can_add_offers",
+    )
     can_submit = fields.Boolean(
         compute="_compute_can_submit",
     )
@@ -1868,6 +1896,10 @@ class ZvyPurchaseOffer(models.Model):
         if not allowed:
             return True
         return self.with_context(zvy_skip_offer_edit_check=True).write(allowed)
+
+    def action_add_offer(self):
+        self.ensure_one()
+        return self.item_id.action_add_offer()
 
     def action_submit(self):
         self.ensure_one()

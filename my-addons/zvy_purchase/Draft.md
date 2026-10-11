@@ -383,3 +383,11 @@ show an action button before Send button ONLY for creator of purchase request.
 the new action button name is 'Add Item'.
 when this button is clicked, add a new purchase item to the purchase request (same as clicking add a line in Purchase Item tab).
 show this button only when Purchase Request status is Draft, hidden otherwise.
+
+---
+
+when Purchase Item status is In Review,
+show an action button before Submit button in Purchase Item and Purchase Offer forms.
+the new action button name is 'Add Offer'.
+when this button is clicked, add a new offer to the purchase item (same as clicking add a line in Purchase Item form).
+show this button ONLY for whom has access to add a line to offer.

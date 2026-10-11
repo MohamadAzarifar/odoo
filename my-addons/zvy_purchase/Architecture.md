@@ -186,6 +186,8 @@ Widget `many2many_tags`. Domain is a field lambda (not a computed Many2many): `s
 
 `offer_ids` UI uses `create="0"` when `not can_add_offers`. Only Commercial Expert and Commercial Manager may create offers (ACL + server check). Commercial Experts additionally require both the parent request and the item to be `in_review` (`_zvy_check_can_add_offers` on offer create).
 
+`action_add_offer()` (item `state == 'in_review'` and `can_add_offers`) opens `zvy.purchase.offer` form in create mode with `default_item_id` (same as the Offers tab Add line / `zvy_open_form_one2many` `onAdd`). Does not create the offer until the user saves. Form header **Add Offer** sits before **Submit**: `invisible="state != 'in_review' or not can_add_offers"`. Otherwise `UserError` / `AccessError`.
+
 `action_submit_offers()` (assigned Commercial Expert only) sets the current user's own Draft/Rejected offers on the item to `in_review` (same end state as per-offer Submit). Offers created by other users are not changed. Already `in_review` offers are left unchanged (no-op); locked terminal states such as `validated` are not overwritten. Requires request and item both `in_review`; otherwise `UserError` / `AccessError` if the user is not in `commercial_expert_ids`. Logs a summary on the item and request chatter ("Submitted own offers…"). Form header **Submit** is `invisible="not can_submit_offers"`.
 
 `action_validate_offers()` (Commercial Manager only) sets all In Review offers on the item to `validated` (via `zvy_skip_offer_edit_check`, same end state as per-offer Validate). Draft, Rejected, and already Validated offers are left unchanged. `AccessError` if the user is not a Commercial Manager. Logs a summary on the item and request chatter ("Validated offers…"). Form header **Validate** sits next to **Submit**; `groups="…group_commercial_manager"` and `invisible="not can_validate_offers"`.
@@ -226,6 +228,8 @@ Specified: one vendor, belongs to one item. Numbered `{item.name}-OFR-{n}` per i
 | `can_select_offers` | Boolean, computed | True when current user is Commercial Manager, this offer’s `state` is `validated`, and the item purchase type is not Tendering |
 
 `mail.thread` + form `<chatter/>`. Tracked: `state` and commercial terms. Sequence writes use `mail_notrack`. Create/unlink and vendor / commercial-term changes are also logged on the item and the request.
+
+`can_add_offers` related from `item_id.can_add_offers` for form domains. `action_add_offer()` delegates to `item_id.action_add_offer()`. Form header **Add Offer** sits before **Submit**: `invisible="item_state != 'in_review' or not can_add_offers"`.
 
 `action_submit()` writes `state = 'in_review'`. Allowed only from `draft` or `rejected`, only by the offer creator, and only when both the parent request and item are `in_review`; otherwise `UserError` / `AccessError`. Form header **Submit** button is `invisible="not can_submit"`.
 
@@ -594,7 +598,8 @@ Do not reuse `zvy.purchase.request` from tendering until that question is answer
 58. Commission roles see PR Approvals across companies (module `1.93`): soften Approvals multi-company rules for purchase-linked rows; open-PR actions set full `_zvy_purchase_allowed_company_ids` so the Approvals tab is populated when only the parent company is selected.
 59. Approvers open linked PR fully (module `1.94`): read-only ACL + record rules on commission case, tender, and purchase order for approval-sequence users so opening the PR from an approval no longer fails on those notebook One2manys.
 60. PR **Add Item** header (module `1.99`): Draft + creator (`can_edit_items`) button before **Send** opens a new purchase item form (`action_add_item`, same as tab Add line).
-61. Stop. Add further states, approvals outcome → PR state, commission calculation, tender envelopes, vendor/price lines on custom POs, or core Purchase integration only after `PRD.md` is updated.
+61. Item/Offer **Add Offer** header (module `1.100`): when item is In Review and `can_add_offers`, button before **Submit** on item and offer forms opens a new offer form (`action_add_offer`, same as Offers tab Add line).
+62. Stop. Add further states, approvals outcome → PR state, commission calculation, tender envelopes, vendor/price lines on custom POs, or core Purchase integration only after `PRD.md` is updated.
 
 ## 10. Open technical decisions
 

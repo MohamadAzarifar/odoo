@@ -247,6 +247,11 @@
             <form string="Purchase Item">
                 <header>
                     <button
+                        name="action_add_offer"
+                        string="Add Offer"
+                        type="object"
+                        invisible="state != 'in_review' or not can_add_offers"/>
+                    <button
                         name="action_submit_offers"
                         string="Submit"
                         type="object"
@@ -395,6 +400,11 @@
             <form string="Offer">
                 <header>
                     <button
+                        name="action_add_offer"
+                        string="Add Offer"
+                        type="object"
+                        invisible="item_state != 'in_review' or not can_add_offers"/>
+                    <button
                         name="action_submit"
                         string="Submit"
                         type="object"
@@ -436,9 +446,11 @@
                     <group>
                         <group>
                             <field name="can_edit" invisible="1"/>
+                            <field name="can_add_offers" invisible="1"/>
                             <field name="can_submit" invisible="1"/>
                             <field name="can_select_offers" invisible="1"/>
                             <field name="show_commercial_fields" invisible="1"/>
+                            <field name="item_state" invisible="1"/>
                             <field name="item_id" readonly="1" force_save="1"/>
                             <field name="product_id" readonly="1" string="Product"/>
                             <field name="create_uid" string="Creator" readonly="1"/>
