@@ -171,6 +171,17 @@ msgid "Action Needed"
 msgstr "اقدام لازم"
 
 #. module: zvy_purchase
+#: model_terms:ir.ui.view,arch_db:zvy_purchase.view_zvy_purchase_request_form
+msgid "Add Item"
+msgstr "افزودن اقلام"
+
+#. module: zvy_purchase
+#: model_terms:ir.ui.view,arch_db:zvy_purchase.view_zvy_purchase_item_form
+#: model_terms:ir.ui.view,arch_db:zvy_purchase.view_zvy_purchase_offer_form
+msgid "Add Offer"
+msgstr "افزودن پیشنهاد"
+
+#. module: zvy_purchase
 #: model:ir.model.fields,field_description:zvy_purchase.field_zvy_purchase_scale_rule__advance_guarantee
 msgid "Advance Payment Guarantee"
 msgstr "ضمانت پیش‌پرداخت"
