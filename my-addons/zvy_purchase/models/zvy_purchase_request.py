@@ -571,6 +571,31 @@ class ZvyPurchaseRequest(models.Model):
             vals.pop("company_id")
         return super().write(vals)
 
+    def action_add_item(self):
+        self.ensure_one()
+        if not self.can_edit_items:
+            if self.state != "draft":
+                raise UserError(
+                    _(
+                        "Purchase items can only be added while the "
+                        "request is in draft."
+                    )
+                )
+            raise AccessError(
+                _(
+                    "Only the creator of the purchase request can add "
+                    "purchase items."
+                )
+            )
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Purchase Item"),
+            "res_model": "zvy.purchase.item",
+            "views": [[False, "form"]],
+            "target": "current",
+            "context": {"default_request_id": self.id},
+        }
+
     def action_send(self):
         for request in self:
             if request.state != "draft":

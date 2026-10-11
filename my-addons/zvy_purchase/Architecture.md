@@ -102,6 +102,8 @@ Specified: owns `item_ids`. Numbered `PR-1`, `PR-2`, … on create.
 | `purchase_order_count` | Integer, computed | Len of `purchase_order_ids` |
 | `show_create_purchase_order_button` | Boolean, computed | ≥1 eligible item: Tendering **or** on an Approved commission case; Selected offer, Approved approval, not already on a PO |
 
+`action_add_item()` (Draft + creator + Planner/CM via `can_edit_items`) opens `zvy.purchase.item` form in create mode with `default_request_id` (same as the Purchase Items tab Add line / `zvy_open_form_one2many` `onAdd`). Does not create the item until the user saves. Form header **Add Item** sits before **Send**: `invisible="not can_edit_items"`. Otherwise `UserError` / `AccessError`.
+
 `action_send()` writes `state = 'in_review'`. Allowed only from `draft` and only by the request creator (`create_uid`); otherwise `UserError` / `AccessError`. Form header **Send** button is `invisible="not can_edit_items"` (Draft + creator + Planner/CM). On Send, all purchase items are set to `submitted`; items that already have commercial experts are then promoted to `in_review`.
 
 `action_back_to_draft()` (Commercial Manager only, `state == 'in_review'`, and not `all_enquiry_items_selected`) opens transient wizard `zvy.purchase.back.to.draft.wizard` with a mandatory `reason` Text field. Confirm writes request `state = 'draft'`, resets all items to `draft`, then re-applies `tendering` on items still linked to a tender, and `_message_log`s the reason on the request chatter. Form header **Back to Draft**: `invisible="state != 'in_review' or all_enquiry_items_selected"`.
@@ -591,7 +593,8 @@ Do not reuse `zvy.purchase.request` from tendering until that question is answer
 57. Commission roles read purchase orders on PR (module `1.92`): read-only ACL + record rules on `zvy.purchase.order` for Commission Manager/Expert so opening a PR from a tender (or case) no longer fails ACL on the Purchase Orders tab.
 58. Commission roles see PR Approvals across companies (module `1.93`): soften Approvals multi-company rules for purchase-linked rows; open-PR actions set full `_zvy_purchase_allowed_company_ids` so the Approvals tab is populated when only the parent company is selected.
 59. Approvers open linked PR fully (module `1.94`): read-only ACL + record rules on commission case, tender, and purchase order for approval-sequence users so opening the PR from an approval no longer fails on those notebook One2manys.
-60. Stop. Add further states, approvals outcome → PR state, commission calculation, tender envelopes, vendor/price lines on custom POs, or core Purchase integration only after `PRD.md` is updated.
+60. PR **Add Item** header (module `1.99`): Draft + creator (`can_edit_items`) button before **Send** opens a new purchase item form (`action_add_item`, same as tab Add line).
+61. Stop. Add further states, approvals outcome → PR state, commission calculation, tender envelopes, vendor/price lines on custom POs, or core Purchase integration only after `PRD.md` is updated.
 
 ## 10. Open technical decisions
 

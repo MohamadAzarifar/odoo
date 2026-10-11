@@ -107,6 +107,8 @@ Rules implied by the draft:
 - A request starts in **Draft**.
 - Each request has a read-only **Company** set from the creator’s active company when the request is created.
 - The request form (and list) show the **Creator** name (`create_uid`).
+- The form has an **Add Item** button before **Send**. Clicking it opens a new purchase item form linked to the request (same as adding a line on the Purchase Items tab).
+- **Add Item** is shown only while the request is Draft **and** the current user is the request creator (Planner or Commercial Manager). After Send (In Review, or any later status), or for non-creators, the button is hidden.
 - The form has a **Send** button. Clicking it sets the request to **In Review**.
 - Send is shown only while the request is Draft **and** the current user is the request creator. After Send (In Review, or any later status), or for non-creators, the button is hidden.
 - Commercial Managers can return an **In Review** request to **Draft** with **Back to Draft** (mandatory reason wizard; see FR-2).

@@ -20,6 +20,11 @@
             <form>
                 <header>
                     <button
+                        name="action_add_item"
+                        string="Add Item"
+                        type="object"
+                        invisible="not can_edit_items"/>
+                    <button
                         name="action_send"
                         string="Send"
                         type="object"

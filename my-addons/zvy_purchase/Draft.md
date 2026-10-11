@@ -375,3 +375,11 @@ once linked to a PO, hide them from the wizard (button hides when none remain).
 add a new menu item for all roles labeled Dashboard.
 the dashboard should be the first route opens in purchase app.
 dashboard contain cards to show reports and links to records based on roles (commercial manager, commission manager, commercial experts, commission experts, planners).
+
+---
+
+when Purchase Request status is Draft,
+show an action button before Send button ONLY for creator of purchase request.
+the new action button name is 'Add Item'.
+when this button is clicked, add a new purchase item to the purchase request (same as clicking add a line in Purchase Item tab).
+show this button only when Purchase Request status is Draft, hidden otherwise.
