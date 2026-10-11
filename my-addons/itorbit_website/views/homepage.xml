@@ -5,7 +5,9 @@
             <div id="wrap" class="oe_structure ito-home">
 
                 <section class="ito-hero" data-name="IT Orbit Hero">
-                    <div class="ito-hero__wash" aria-hidden="true"/>
+                    <div class="ito-hero__field" aria-hidden="true">
+                        <canvas class="ito-hero__pixels"/>
+                    </div>
                     <div class="container ito-hero__grid">
                         <div class="ito-hero__copy">
                             <p class="ito-hero__brand" data-ito-reveal="1">
@@ -19,26 +21,6 @@
                                 <a href="/contactus" class="ito-btn ito-btn--primary">Contact us</a>
                                 <a href="#products" class="ito-btn ito-btn--secondary">View products</a>
                             </div>
-                        </div>
-                        <div class="ito-hero__visual" data-ito-reveal="4" aria-hidden="true">
-                            <svg class="ito-hero__diagram" viewBox="0 0 420 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation" direction="ltr">
-                                <rect x="24" y="28" width="372" height="304" rx="12" stroke="currentColor" stroke-opacity="0.12"/>
-                                <rect x="48" y="56" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.04" stroke="#f05a28" stroke-opacity="0.45"/>
-                                <text x="118" y="94" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">Orbit@ll</text>
-                                <text x="118" y="116" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Production line</text>
-                                <rect x="232" y="56" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.03" stroke="#07111f" stroke-opacity="0.14"/>
-                                <text x="302" y="94" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">EPIC</text>
-                                <text x="302" y="116" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Process</text>
-                                <rect x="48" y="172" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.03" stroke="#07111f" stroke-opacity="0.14"/>
-                                <text x="118" y="210" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">ACE</text>
-                                <text x="118" y="232" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Rules</text>
-                                <rect x="232" y="172" width="140" height="88" rx="8" fill="#07111f" fill-opacity="0.03" stroke="#07111f" stroke-opacity="0.14"/>
-                                <text x="302" y="210" text-anchor="middle" direction="ltr" fill="#07111f" fill-opacity="0.85" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="15" font-weight="700">Citadel</text>
-                                <text x="302" y="232" text-anchor="middle" direction="ltr" fill="#5a6d86" font-family="Vazirmatn, Outfit, sans-serif" font-size="11">Security</text>
-                                <rect x="140" y="280" width="140" height="36" rx="8" fill="#f05a28" fill-opacity="0.1" stroke="#f05a28" stroke-opacity="0.5"/>
-                                <text x="210" y="303" text-anchor="middle" direction="ltr" fill="#f05a28" font-family="Space Grotesk, Vazirmatn, sans-serif" font-size="14" font-weight="700">NAD</text>
-                                <path d="M118 144v20M302 144v20M118 260v12h184v-12" stroke="#07111f" stroke-opacity="0.12" stroke-width="1.5"/>
-                            </svg>
                         </div>
                     </div>
                 </section>

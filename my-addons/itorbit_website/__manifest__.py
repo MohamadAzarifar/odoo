@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'IT Orbit Website',
-    'version': '1.3.1',
+    'version': '1.3.5',
     'category': 'Website',
     'summary': 'Homepage for مدارگسترش (IT Orbit) — national software platforms',
     'description': """

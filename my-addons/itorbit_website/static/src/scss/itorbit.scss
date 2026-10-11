@@ -206,42 +206,54 @@ html[lang^='fa'] .ito-home,
 /* ---------- Hero ---------- */
 .ito-hero {
     position: relative;
+    isolation: isolate;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
+    display: block;
     padding: 7rem 0 5rem;
     background: var(--ito-white);
     color: var(--ito-ink);
     overflow: hidden;
 }
 
-.ito-hero__wash {
-    position: absolute;
-    inset: 0;
+// Absolute must win over website snippet `position: relative` defaults.
+.ito-hero > .ito-hero__field {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0;
+    width: auto !important;
+    height: auto !important;
     pointer-events: none;
-    background:
-        radial-gradient(70% 55% at 85% 20%, rgba(240, 90, 40, 0.08), transparent 60%),
-        radial-gradient(50% 40% at 10% 90%, rgba(7, 17, 31, 0.04), transparent 55%),
-        linear-gradient(180deg, var(--ito-paper) 0%, var(--ito-white) 55%, var(--ito-white) 100%);
+    background: var(--ito-white);
 }
 
-.ito-hero__grid {
+.ito-hero__pixels {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ito-hero > .ito-hero__grid {
     position: relative;
     z-index: 1;
-    display: grid;
-    gap: 3rem;
+    display: flex;
     align-items: center;
-}
-
-@media (min-width: 992px) {
-    .ito-hero__grid {
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 4rem;
-    }
+    justify-content: center;
+    min-height: 70vh;
 }
 
 .ito-hero__copy {
     max-width: 36rem;
+    width: 100%;
+    position: relative;
+    margin-inline: auto;
+    padding: 1.75rem 1.85rem 1.85rem;
+    border-radius: 1rem;
+    // Frosted glass so copy stays readable over the full-bleed wind field.
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(7, 17, 31, 0.08);
+    box-shadow: 0 18px 48px rgba(7, 17, 31, 0.1);
+    -webkit-backdrop-filter: blur(22px) saturate(1.15);
+    backdrop-filter: blur(22px) saturate(1.15);
 }
 
 .ito-hero__brand {
@@ -297,26 +309,6 @@ html[lang^='fa'] .ito-home,
     display: flex;
     flex-wrap: wrap;
     gap: 0.85rem;
-}
-
-.ito-hero__visual {
-    display: none;
-}
-
-@media (min-width: 992px) {
-    .ito-hero__visual {
-        display: block;
-    }
-}
-
-.ito-hero__diagram {
-    width: 100%;
-    max-width: 420px;
-    height: auto;
-    color: var(--ito-navy);
-    margin-inline-start: auto;
-    display: block;
-    direction: ltr;
 }
 
 @media (max-width: 991px) {
