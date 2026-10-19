@@ -134,19 +134,19 @@ THANKS_ARCH = """
 """
 
 ITO_FONTS = {
-    'font': "'Outfit'",
+    'font': "'Inter'",
     'headings-font': "'Space Grotesk'",
-    'navbar-font': "'Outfit'",
-    'buttons-font': "'Outfit'",
-    'google-fonts': "('Outfit', 'Space Grotesk', 'Vazirmatn')",
+    'navbar-font': "'JetBrains Mono'",
+    'buttons-font': "'Inter'",
+    'google-fonts': "('Inter', 'Space Grotesk', 'JetBrains Mono', 'Vazirmatn')",
 }
 
 ITO_PALETTE = {
-    'o-color-1': '#f05a28',
-    'o-color-2': '#07111f',
-    'o-color-3': '#9db0c9',
-    'o-color-4': '#f3f6fb',
-    'o-color-5': '#0d1a2c',
+    'o-color-1': '#F7931A',
+    'o-color-2': '#030304',
+    'o-color-3': '#94A3B8',
+    'o-color-4': '#0F1115',
+    'o-color-5': '#FFD600',
     'menu': 2,
     'footer': 2,
     'copyright': 2,
@@ -353,8 +353,8 @@ def setup_website(env, *, apply_theme=True):
             'email': 'Info@itorbit.net',
             'phone': '021-88373555',
             'website': 'https://www.itorbit.net',
-            'primary_color': '#f05a28',
-            'secondary_color': '#07111f',
+            'primary_color': '#F7931A',
+            'secondary_color': '#030304',
         })
 
     if apply_theme:

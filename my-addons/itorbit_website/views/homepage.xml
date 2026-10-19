@@ -5,8 +5,10 @@
             <div id="wrap" class="oe_structure ito-home">
 
                 <section class="ito-hero" data-name="IT Orbit Hero">
-                    <div class="ito-hero__field" aria-hidden="true">
-                        <canvas class="ito-hero__pixels"/>
+                    <div class="ito-hero__void" aria-hidden="true">
+                        <div class="ito-hero__grid-bg"/>
+                        <div class="ito-hero__glow ito-hero__glow--orange"/>
+                        <div class="ito-hero__glow ito-hero__glow--gold"/>
                     </div>
                     <div class="container ito-hero__grid">
                         <div class="ito-hero__copy">
@@ -20,6 +22,17 @@
                             <div class="ito-hero__actions" data-ito-reveal="4">
                                 <a href="/contactus" class="ito-btn ito-btn--primary">Contact us</a>
                                 <a href="#products" class="ito-btn ito-btn--secondary">View products</a>
+                            </div>
+                        </div>
+                        <div class="ito-hero__stage" aria-hidden="true">
+                            <div class="ito-orb">
+                                <span class="ito-orb__ring ito-orb__ring--outer"/>
+                                <span class="ito-orb__ring ito-orb__ring--inner"/>
+                                <span class="ito-orb__core"/>
+                                <span class="ito-live">
+                                    <span class="ito-live__ping"/>
+                                    <span class="ito-live__dot"/>
+                                </span>
                             </div>
                         </div>
                     </div>

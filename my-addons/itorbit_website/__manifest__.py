@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'IT Orbit Website',
-    'version': '1.3.5',
+    'version': '1.3.6',
     'category': 'Website',
     'summary': 'Homepage for مدارگسترش (IT Orbit) — national software platforms',
     'description': """
 Modern bilingual (Persian / English) homepage for مدار گسترش فناوری اطلاعات.
 Products: Orbit@ll, EPIC, ACE, Citadel, NAD.
-Stripe-style product-suite layout (light editorial, brand orange + navy).
+Bitcoin DeFi visual system: true void, orange and gold glow, geometric type.
     """,
     'author': 'مدارگسترش',
     'website': 'https://www.itorbit.net',
