@@ -74,8 +74,9 @@ services:
       - POSTGRES_PASSWORD=odoo
     volumes:
       - odoo-db-data:/var/lib/postgresql/data
+    # Host-only: never publish Postgres on 0.0.0.0 (internet scanners).
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     restart: unless-stopped
 
 volumes:
@@ -102,23 +103,45 @@ db_user = odoo
 db_password = odoo
 addons_path = addons
 http_port = 8069
-http_interface = 0.0.0.0
+http_interface = 127.0.0.1
+proxy_mode = True
+list_db = False
+dbfilter = ^main$
 CONF
 chown odoo:odoo "$ODOO_HOME/odoo.conf"
 chmod 640 "$ODOO_HOME/odoo.conf"
 
 echo "==> systemd unit"
+cat > /etc/systemd/system/odoo-postgres.service <<'UNIT'
+[Unit]
+Description=Odoo Postgres (docker compose)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/odoo
+ExecStart=/usr/bin/docker compose up -d
+ExecStop=/usr/bin/docker compose stop
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target
+UNIT
 cat > /etc/systemd/system/odoo.service <<'UNIT'
 [Unit]
 Description=Odoo 20
-After=network.target docker.service
-Requires=docker.service
+After=network-online.target docker.service odoo-postgres.service
+Wants=network-online.target
+Requires=docker.service odoo-postgres.service
 
 [Service]
 Type=simple
 User=odoo
 Group=odoo
 WorkingDirectory=/opt/odoo
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 30); do pg_isready -h 127.0.0.1 -p 5432 >/dev/null 2>&1 && exit 0; sleep 2; done; exit 1'
 ExecStart=/opt/odoo/.venv/bin/python /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf
 Restart=on-failure
 RestartSec=5
@@ -127,7 +150,7 @@ RestartSec=5
 WantedBy=multi-user.target
 UNIT
 systemctl daemon-reload
-systemctl enable odoo
+systemctl enable odoo-postgres.service odoo.service
 
 if [[ -f "$ODOO_HOME/scripts/resources.conf" && -f "$ODOO_HOME/scripts/odoo-resources.sh" ]]; then
   echo "==> Resource limits (/etc/odoo/resources.conf)"
@@ -153,9 +176,13 @@ systemctl --no-pager status odoo
 DEP
 chmod 755 "$ODOO_HOME/deploy.sh"
 
-echo "==> Firewall (allow 22 and 8069)"
+echo "==> Firewall (public: 22/80/443 only; deny DB and Odoo direct ports)"
 ufw allow OpenSSH || true
-ufw allow 8069/tcp || true
+ufw allow 80/tcp || true
+ufw allow 443/tcp || true
+ufw deny 5432/tcp || true
+ufw deny 8069/tcp || true
+ufw deny 8072/tcp || true
 ufw --force enable || true
 
 echo "==> Waiting for Postgres"

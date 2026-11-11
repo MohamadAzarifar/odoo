@@ -98,9 +98,14 @@ sudo systemctl start odoo-resources.service   # re-apply /etc/odoo/resources.con
 ## Notes
 
 - `docker-compose.yml`, `odoo.conf`, and `deploy.sh` are **server-local**; they are not on `origin/20.0`.
-- Public HTTP is **port 80** via Nginx. Odoo listens on **8069**. `odoo.conf` has `proxy_mode = True`.
-- Nginx site: `/etc/nginx/sites-available/odoo`. `/` → `127.0.0.1:8069`. With `workers > 0`, `/websocket` and `/longpolling` → gevent on **8072** (`odoo-resources` keeps that in sync).
+- Public HTTP(S) is **80/443 via Nginx only**. Odoo must listen on **127.0.0.1:8069** (`http_interface = 127.0.0.1`, `proxy_mode = True`). Never open 8069/8072 in the firewall.
+- Postgres must publish only as **`127.0.0.1:5432:5432`** (never `0.0.0.0:5432`). Use a strong `db_password` (not `odoo`); keep a root-only copy at `/root/.odoo_db_password` on the live host if needed for ops.
+- Production DB pinning: `dbfilter = ^main$`, `list_db = False`.
+- Nginx site: `/etc/nginx/sites-available/modir.digital` (or `odoo`). `/` → `127.0.0.1:8069`. With `workers > 0`, `/websocket` and `/longpolling` → gevent on **127.0.0.1:8072**.
+- UFW public allowlist: **22, 80, 443**. Explicitly deny **5432, 8069, 8072** (and app backends like 8080 unless intentionally public).
 - Outbound from the `odoo` user is denied except destinations listed in `/etc/odoo/outbound-allow.conf`. Apply with `systemctl restart odoo-egress.service` (timer refreshes DNS every 30 minutes).
+- Boot order: `odoo-postgres.service` (compose up) before `odoo.service` (`Requires=` + `pg_isready` ExecStartPre).
 - Enterprise AI uses **`modir_ai_provider`** (OpenAI-compatible URL / model / API key in **Settings → AI Provider**). It never calls `ai.api.odoo.com`. Provider host currently allowed: `ai.liara.ir` (see `/etc/odoo/outbound-allow.conf`). Full runbook: [AI-CONFIGURATION.md](AI-CONFIGURATION.md).
 - Do **not** use the old IAP SOCKS tunnel (`scripts/ai-iap-tunnel.sh` / `odoo.service.d/proxy.conf`) for AI.
 - Resource caps live in `/etc/odoo/resources.conf` (defaults sized for **2 vCPU / ~4 GiB**: Odoo `MemoryMax=2G` + `workers=2`, Postgres `mem_limit=1g`, Nginx `MemoryMax=128M`). Edit that file, then `systemctl start odoo-resources.service`.
+- SSH brute-force protection: `fail2ban` jail `sshd`.

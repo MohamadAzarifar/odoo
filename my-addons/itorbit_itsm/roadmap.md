@@ -24,20 +24,23 @@
 ## Milestone map
 
 ```mermaid
-gantt
-    title IT Orbit ITSM / ITIL on Odoo 20
-    dateFormat  YYYY-MM-DD
-    section Foundation
-    M0 Discovery & design           :m0, 2026-04-01, 14d
-    M1 Platform & security          :m1, after m0, 14d
-    section Core ITSM
-    M2 Service Desk go-live         :m2, after m1, 21d
-    M3 Knowledge & self-service     :m3, after m2, 14d
-    section ITIL depth
-    M4 Problem & Change (custom)    :m4, after m3, 28d
-    M5 CMDB / assets / reporting    :m5, after m4, 21d
-    section Stabilize
-    M6 Optimize & handover          :m6, after m5, 14d
+flowchart TB
+    subgraph Foundation
+        M0[M0 Discovery 2w]
+        M1[M1 Platform 2w]
+    end
+    subgraph Core_ITSM
+        M2[M2 Service Desk 3w]
+        M3[M3 Knowledge 2w]
+    end
+    subgraph ITIL_depth
+        M4[M4 Problem Change 4w]
+        M5[M5 CMDB reporting 3w]
+    end
+    subgraph Stabilize
+        M6[M6 Handover 2w]
+    end
+    M0 --> M1 --> M2 --> M3 --> M4 --> M5 --> M6
 ```
 
 ---
